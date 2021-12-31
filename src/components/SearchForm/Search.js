@@ -6,7 +6,7 @@ function Search() {
     <div className="search">
         <div className="search__items"></div>
       <input type="text" placeholder="Enter topic" className="search__field" />
-      <button className="search__button">Search</button>
+      <button className="search__button" type="submit">Search</button>
     </div>
   );
 }
