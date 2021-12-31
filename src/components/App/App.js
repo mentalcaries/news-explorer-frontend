@@ -1,14 +1,14 @@
-import { React } from "react";
-import Search from "../SearchForm/Search";
+import { React } from 'react';
+import './App.css';
+import Search from '../SearchForm/Search';
+import Main from '../Main/Main';
 
 function App() {
   return (
     <div className="app">
-      <h1 className="header">Hello</h1>
-    <Search></Search>
-
+      <Main>
+      </Main>
     </div>
-
   );
 }
 
