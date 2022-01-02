@@ -10,13 +10,15 @@ function Footer() {
           <p className="footer__text">
             &copy;{new Date().getFullYear()} Devin Jaggernauth | Practicum
           </p>
-              <div className="footer__links">
-                  <a href="" className="footer__link">Home</a>
-                  <a href="" className="footer__link">Practicum by Yandex</a>
-                  <div className="footer__social-icons">
-                      <a href="" className="footer__social-icon"><img src={gh_icon} alt="" /></a>
-                      <a href="" className="footer__social-icon"><img src={fb_icon} alt="" /></a>
-                  </div>
+              <div className="footer__items">
+              	<div className="footer__links">
+                	<a href="http://jaggernauth.dev" className="footer__link" target="_blank">Home</a>
+                  <a href="https://practicum.yandex.com" className="footer__link" target="_blank" >Practicum by Yandex</a>
+              </div>                
+              <div className="footer__social-icons">
+              	<a href="" className="footer__social-icon"><img src={gh_icon} alt="" /></a>
+                <a href="" className="footer__social-icon"><img src={fb_icon} alt="" /></a>
+                </div>
               </div>
       </div>
     </footer>
