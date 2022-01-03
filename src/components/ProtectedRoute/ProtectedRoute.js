@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 
-function ProtecteRoute({children, loggedIn, ...props}){
+function ProtectedRoute({children, loggedIn, ...props}){
     return(
         <Route {...props}>
             {loggedIn? children : <Redirect to={"/"} />}
@@ -9,4 +9,4 @@ function ProtecteRoute({children, loggedIn, ...props}){
     )
 }
 
-export default ProtecteRoute;
+export default ProtectedRoute;

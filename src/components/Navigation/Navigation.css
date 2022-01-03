@@ -1,0 +1,44 @@
+.navigation{
+    display: flex;
+
+}
+
+.header__link {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 24px;
+  color: #ffffff;
+  text-decoration: none;
+  align-self: center;
+  margin-right: 42px;
+  margin-top:30px;
+  padding-bottom: 26px;
+
+}
+
+.header__link_active{
+    border-bottom: 3px solid white;
+    padding-bottom: 23px;
+}
+
+.header__button {
+  border: 1px solid #ffffff;
+  background-color: transparent;
+  box-sizing: border-box;
+  border-radius: 100px;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #ffffff;
+  min-width: 176px;
+  height: 48px;
+  margin-top: 19px;
+  cursor: pointer;
+}

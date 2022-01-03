@@ -7,10 +7,8 @@
 
 .header__content {
   display: flex;
-  align-items: center;
   justify-content: space-between;
   margin: 0 108px;
-  padding-top: 30px;
 
 }
 
@@ -21,39 +19,7 @@
   font-size: 20px;
   line-height: 24px;
   color: #fff;
+  margin-top: 30px;
 }
 
-.header__nav{
-    display: flex;
 
-}
-
-.header__link {
-  font-family: 'Roboto';
-  font-style: normal;
-  font-weight: 500;
-  font-size: 18px;
-  line-height: 24px;
-  color: #ffffff;
-  text-decoration: none;
-  align-self: center;
-  margin-right: 42px;
-}
-
-.header__button {
-  border: 1px solid #ffffff;
-  background-color: transparent;
-  box-sizing: border-box;
-  border-radius: 100px;
-  font-family: Roboto;
-  font-style: normal;
-  font-weight: 500;
-  font-size: 18px;
-  line-height: 24px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: #ffffff;
-  min-width: 176px;
-  height: 48px;
-}
