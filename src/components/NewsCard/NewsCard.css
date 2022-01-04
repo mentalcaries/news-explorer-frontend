@@ -4,12 +4,12 @@
   background: #ffffff;
   border-radius: 16px;
   overflow: hidden;
-  border: 1px solid black;
   position: relative;
+  filter: drop-shadow(10px 10px 10px rgba(8, 29, 45, 0.1));
 }
 
 .newscard__image {
-  width: 400px;
+  width: 100%;
   height: 272px;
   object-fit: cover;
   position: relative;
@@ -58,7 +58,7 @@
   font-size: 26px;
   line-height: 30px;
   color: #1a1b22;
-  margin: 0 ;
+  margin: 0;
 }
 
 .newscard__paragraph {
@@ -68,7 +68,11 @@
   font-size: 16px;
   line-height: 22px;
   color: #1a1b22;
-  margin: 0
+  margin: 0;
+  display: -webkit-box;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
 .newscard__source {
@@ -80,5 +84,51 @@
   letter-spacing: 0.4px;
   text-transform: uppercase;
   color: #b6bcbf;
-  margin: 0
+  margin: 0;
+}
+
+@media screen and (max-width: 800px) {
+  .newscard {
+    height: 420px;
+    width: 224px;
+  }
+
+  .newscard__image {
+    height: 150px;
+  }
+
+  .newscard__text{
+    max-width: 192px;
+    height: 238px;
+    margin-top: 16px;
+    margin-bottom: 16px;
+  }
+  .newscard__title {
+    font-size: 22px;
+    line-height: 24px;
+  }
+
+  .newscard__paragraph{
+    text-overflow: ellipsis;
+    height: 88px;
+    width: 100%;
+    -webkit-line-clamp: 4;
+ 
+  }
+
+}
+
+@media screen and (max-width: 400px) {
+  .newscard{
+    width: 288px;
+    height: 440px;
+
+  }
+  .newscard__image{
+    height: 196px
+  }
+  .newscard__text{
+    max-width: 256px;
+    height: 212px
+  }
 }

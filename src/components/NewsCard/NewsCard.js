@@ -15,6 +15,7 @@ function NewsCard() {
             Woods," the idea of having a special "sit spot" has stuck with me. This
             advice, which Louv attributes to nature educator Jon Young, is for both
             adults and children to find.
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Recusandae fugiat magnam error eos ipsa quos tempore accusamus architecto aspernatur, minima vitae officiis facilis laborum reprehenderit, alias quidem sapiente inventore animi.
           </p>
           <p className="newscard__source">The Sunday Punch</p>
       </div>
