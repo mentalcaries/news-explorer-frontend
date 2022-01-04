@@ -1,14 +1,22 @@
 import React from "react";
+import NewsCard from "../NewsCard/NewsCard";
 import './SearchResults.css'
 
 function SearchResults(){
     return(
         <section className="results">
-            <h2 className="results__title">Search results</h2>
-            <div className="results__cards">
-                {/* News Articles */}
+            <div className="results__wrapper">
+                <h2 className="results__title">Search results</h2>
+                <div className="results__cards">
+                    {/* News Articles */}
+                    <NewsCard/>
+                    <NewsCard/>
+                    <NewsCard/>
+                </div>
+                <div className="results__button">
+                    <button className="results__show-more">Show More</button>
+                    </div>
             </div>
-            <button className="results__show-more">Show More</button>
         </section>
     )
 }
