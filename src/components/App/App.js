@@ -6,6 +6,7 @@ import Footer from '../Footer/Footer';
 import Header from '../Header/Header';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import NewsCard from '../NewsCard/NewsCard';
+import SearchResults from '../SearchResults/SearchResults';
 
 function App() {
   return (
@@ -16,7 +17,7 @@ function App() {
       </ProtectedRoute>
       <Main></Main>
       <About/>
-      <NewsCard/>
+      <SearchResults/>
       <Footer/>
     </div>
   );

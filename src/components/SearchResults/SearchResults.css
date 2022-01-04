@@ -1,0 +1,22 @@
+.results {
+    max-width: 1232px;
+    margin: 80px auto;
+}
+
+.results__title {
+  font-family: Roboto Slab;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 40px;
+  line-height: 46px;
+  color: #1a1b22;
+}
+
+.results__show-more {
+  background: #e8e8e8;
+  border-radius: 80px;
+  border: none;
+  cursor: pointer;
+  min-width: 288px;
+  min-height: 64px ;
+}
