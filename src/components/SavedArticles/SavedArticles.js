@@ -1,4 +1,5 @@
 import React from 'react';
+import SavedCard from '../SavedCard/SavedCard';
 import './SavedArticles.css';
 
 function SavedArticles() {
@@ -14,7 +15,14 @@ function SavedArticles() {
           Nature, Yellowstone and 2 others
         </span>
       </p>
-
+    <div className="saved__articles">
+    <SavedCard/>
+    <SavedCard/>
+    <SavedCard/>
+    <SavedCard/>
+    <SavedCard/>
+    </div>
+      {/* Add saved cards here */}
 
     </section>
   );

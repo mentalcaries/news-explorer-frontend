@@ -16,7 +16,7 @@
   position: relative;
 }
 
-.newscard__save {
+/* .newscard__save {
   position: absolute;
   margin: 0;
   top: 24px;
@@ -41,7 +41,7 @@
 
 .newscard__save_bookmarked{
   background-image: url('../../images/bookmarked.svg');
-}
+} */
 
 .newscard__date {
   font-family: 'Source Sans Pro';

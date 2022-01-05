@@ -12,12 +12,15 @@ import { Route } from 'react-router';
 
 function App() {
 
-  const [loggedIn, setLoggedIn] = useState(true)
+  const [loggedIn, setLoggedIn] = useState(false)
   
+  function handleLogin(){
+    setLoggedIn(!loggedIn);
+  }
 
   return (
     <div className="app">
-      <Header loggedIn={loggedIn}/>
+      <Header loggedIn={loggedIn} onLogin={handleLogin} />
       <Route exact path='/'>
       <Main />
       </Route>

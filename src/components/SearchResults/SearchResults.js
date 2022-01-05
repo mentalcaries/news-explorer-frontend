@@ -1,5 +1,5 @@
 import React from "react";
-import NewsCard from "../NewsCard/NewsCard";
+import ResultCard from "../ResultCard/ResultCard";
 import './SearchResults.css'
 
 function SearchResults(){
@@ -9,9 +9,9 @@ function SearchResults(){
                 <h2 className="results__title">Search results</h2>
                 <div className="results__cards">
                     {/* News Articles */}
-                    <NewsCard/>
-                    <NewsCard/>
-                    <NewsCard/>
+                    <ResultCard/>
+                    <ResultCard/>
+                    <ResultCard/>
                 </div>
                 <div className="results__button">
                     <button className="results__show-more">Show More</button>

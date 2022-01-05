@@ -2,10 +2,11 @@ import React from 'react';
 import './NewsCard.css';
 import sampleImage from '../../images/coffee.jpg';
 
-function NewsCard() {
+function NewsCard({children}) {
   return (
     <article className="newscard">
-      <button className="newscard__save" />
+      {children}
+      {/* <button className="newscard__save" /> */}
       <img src={sampleImage} alt="" className="newscard__image" />
       <div className="newscard__text">
         <p className="newscard__date">January 3, 2022</p>
