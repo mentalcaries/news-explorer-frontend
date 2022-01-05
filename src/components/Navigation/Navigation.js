@@ -1,15 +1,19 @@
 import React from 'react';
 import './Navigation.css';
+import { useLocation } from 'react-router';
 import { NavLink } from 'react-router-dom';
 
 function Navigation({ loggedIn }) {
+
+  const { pathname } = useLocation();
+
   return (
-    <nav className="navigation">
+    <nav className="nav ">
       <NavLink
         exact
         to="/"
-        className="header__link"
-        activeClassName="header__link_active"
+        className={`nav__link ${pathname==='/articles'? 'nav_light' :''}`}
+        activeClassName={`nav__link_active ${pathname==='/articles'? 'nav__link_active_light' :''}`}
       >
         Home
       </NavLink>
@@ -17,16 +21,16 @@ function Navigation({ loggedIn }) {
         <NavLink
           exact
           to="/articles"
-          className="header__link"
-          activeClassName="header__link_active"
+          className={`nav__link ${pathname==='/articles'? 'nav_light' :''}`}
+          activeClassName={`nav__link_active ${pathname==='/articles'? 'nav__link_active_light' :''}`}
         >
           Saved Articles
         </NavLink>
       )}
       {!loggedIn ? (
-        <button className="header__button">Sign in</button>
+        <button className={`nav__button ${pathname==='/articles'? 'nav__button_light' :''}`}>Sign in</button>
       ) : (
-        <button className="header__button">User Signout</button>
+        <button className={`nav__button ${pathname==='/articles'? 'nav__button_light' :''}`}>User Signout</button>
       )}
     </nav>
   );

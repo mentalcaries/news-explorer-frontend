@@ -1,9 +1,8 @@
-.navigation{
-    display: flex;
-
+.nav {
+  display: flex;
 }
 
-.header__link {
+.nav__link {
   font-family: 'Roboto';
   font-style: normal;
   font-weight: 500;
@@ -13,17 +12,16 @@
   text-decoration: none;
   align-self: center;
   margin-right: 42px;
-  margin-top:30px;
+  margin-top: 30px;
   padding-bottom: 26px;
-
 }
 
-.header__link_active{
-    border-bottom: 3px solid white;
-    padding-bottom: 23px;
+.nav__link_active {
+  border-bottom: 3px solid white;
+  padding-bottom: 23px;
 }
 
-.header__button {
+.nav__button {
   border: 1px solid #ffffff;
   background-color: transparent;
   box-sizing: border-box;
@@ -41,4 +39,18 @@
   height: 48px;
   margin-top: 19px;
   cursor: pointer;
+}
+
+.nav_light {
+  color: #1a1b22;
+}
+
+.nav__button_light {
+  color: #1a1b22;
+  border: 1px solid #1a1b22;
+}
+
+.nav__link_active_light {
+  color: #1a1b22;
+  border-bottom: 3px solid #1a1b22;
 }
