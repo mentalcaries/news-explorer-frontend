@@ -5,7 +5,7 @@
   right: 24px;
   z-index: 3;
   background: #ffffff;
-  max-height: 40px;
+  height: 40px;
   width: 40px;
   border-radius: 8px;
   border: none;
@@ -14,13 +14,34 @@
   background-position: center;
   filter: drop-shadow(2px 2px 2px rgba(0, 0, 0, 0.4));
   transition: 0.3s linear;
+  cursor: pointer;
 }
 
 .save-button:hover {
   background-image: url('../../images/bookmark_hover.svg');
 }
 
-.save-button_bookmarked {
+.save-button_active {
   background-image: url('../../images/bookmarked.svg');
+  transition:  transform 0.2s linear
+}
+.save-button_active:hover {
+  transform: scale(1.05);
+  background-image: url('../../images/bookmarked.svg');
+
 }
 
+@media screen and (max-width: 800px) {
+  .save-button{
+    top: 8px;
+    right: 8px;
+  }
+  
+}
+@media screen and (max-width: 615px) {
+  .save-button{
+    top: 16px;
+    right: 16px;
+  }
+  
+}

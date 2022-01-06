@@ -21,6 +21,7 @@
   background-position: center;
   filter: drop-shadow(2px 2px 2px rgba(0, 0, 0, 0.4));
   transition: 0.3s linear;
+  cursor: pointer;
 }
 
 .delete-button:hover{  
@@ -81,6 +82,34 @@ cursor: pointer;
   .tooltip{
     top: 69px;
     right: 24px;
+  }
+  
+}
+@media screen and (max-width: 800px) {
+  .delete-button{
+    top: 8px;
+    right: 8px
+  }
+
+  .keyword-label{
+    top:8px;
+    left: 8px
+  }
+  
+  .tooltip{
+display: none;
+  }
+  
+}
+@media screen and (max-width: 615px) {
+  .delete-button{
+    top: 16px;
+    right: 16px
+  }
+
+  .keyword-label{
+    top:16px;
+    left: 16px
   }
   
 }
