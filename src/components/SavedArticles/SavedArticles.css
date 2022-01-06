@@ -1,7 +1,14 @@
 .saved {
-  margin: 80px 104px;
+  /* margin: 80px 104px; */
+  padding: 80px 16px;
+  margin: 0 auto;
 }
 
+.saved__text{
+  max-width: 1232px;
+  margin: 0 auto;
+
+}
 .saved__title {
   font-family: Roboto;
   font-style: normal;
@@ -38,6 +45,8 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 16px;
+  background: #F5F6F7;
+  padding: 62px 104px;
 }
 
 

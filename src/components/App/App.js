@@ -5,14 +5,13 @@ import About from '../About/About';
 import Footer from '../Footer/Footer';
 import Header from '../Header/Header';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
-import NewsCard from '../NewsCard/NewsCard';
 import SearchResults from '../SearchResults/SearchResults';
 import SavedArticles from '../SavedArticles/SavedArticles';
 import { Route } from 'react-router';
 
 function App() {
 
-  const [loggedIn, setLoggedIn] = useState(false)
+  const [loggedIn, setLoggedIn] = useState(true)
   
   function handleLogin(){
     setLoggedIn(!loggedIn);

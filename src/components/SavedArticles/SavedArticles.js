@@ -5,6 +5,7 @@ import './SavedArticles.css';
 function SavedArticles() {
   return (
     <section className="saved">
+      <div className="saved__text">
       <h3 className="saved__title">Saved Articles</h3>
       <h2 className="saved__heading">
         Elise, you have 5 saved articles
@@ -15,6 +16,8 @@ function SavedArticles() {
           Nature, Yellowstone and 2 others
         </span>
       </p>
+      </div>
+
     <div className="saved__articles">
     <SavedCard/>
     <SavedCard/>
