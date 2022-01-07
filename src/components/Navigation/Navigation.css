@@ -73,3 +73,28 @@
     height: 40px;
   }
 }
+@media screen and (max-width: 620px) {
+
+.nav{
+  flex-direction: column;
+  gap: 22px;
+  max-width: 288px;
+  padding-bottom: 24px;
+}
+
+.nav__link{
+  font-size: 18px;
+  line-height: 56px;
+  margin: 0;
+  padding: 0;
+  align-self: flex-start;
+}
+
+.nav__button{
+  font-size: 18px;
+  line-height: 24px;
+  height: 56px;
+  margin:0;
+}
+
+}
