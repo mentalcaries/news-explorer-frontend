@@ -3,11 +3,11 @@ import './Navigation.css';
 import { useLocation } from 'react-router';
 import { NavLink } from 'react-router-dom';
 
-function Navigation({ onLogin, loggedIn }) {
+function Navigation({ onLogin, loggedIn, isMenuOpen }) {
 
   const { pathname } = useLocation();
   return (
-    <nav className="nav ">
+    <nav className={`nav ${isMenuOpen? 'nav_open' : ''}`}>
       <NavLink
         exact
         to="/"
@@ -18,19 +18,19 @@ function Navigation({ onLogin, loggedIn }) {
       </NavLink>
       {loggedIn && (
         <NavLink
-          exact
-          to="/articles"
-          className={`nav__link ${pathname==='/articles'? 'nav_light' :''}`}
-          activeClassName={`nav__link_active ${pathname==='/articles'? 'nav__link_active_light' :''}`}
+        exact
+        to="/articles"
+        className={`nav__link ${pathname==='/articles'? 'nav_light' :''}`}
+        activeClassName={`nav__link_active ${pathname==='/articles'? 'nav__link_active_light' :''}`}
         >
           Saved Articles
         </NavLink>
       )}
       {!loggedIn ? (
         <button onClick={onLogin} className={`nav__button ${pathname==='/articles'? 'nav__button_light' :''}`}>Sign in</button>
-      ) : (
-        <button onClick={onLogin} className={`nav__button ${pathname==='/articles'? 'nav__button_light' :''}`}>User Signout</button>
-      )}
+        ) : (
+          <button onClick={onLogin} className={`nav__button ${pathname==='/articles'? 'nav__button_light' :''}`}>User Signout</button>
+          )}
     </nav>
   );
 }

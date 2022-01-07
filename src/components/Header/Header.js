@@ -33,7 +33,7 @@ function Header({onLogin, loggedIn}) {
             setIsMenuOpen(!isMenuOpen);
           }}
         />
-        {isMenuOpen && <Navigation onLogin={onLogin} loggedIn={loggedIn} />}
+        <Navigation onLogin={onLogin} loggedIn={loggedIn} isMenuOpen={isMenuOpen}/>
       </div>
     </header>
   );

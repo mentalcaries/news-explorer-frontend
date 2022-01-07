@@ -79,8 +79,23 @@
   flex-direction: column;
   gap: 22px;
   max-width: 288px;
-  padding-bottom: 24px;
+  padding-bottom: 0;
+  overflow: hidden;
+  transition: all 0.3s linear;
+  max-height: 0;
+  transform-origin: top;
+  transform: scaleY(0);
 }
+
+.nav_open{
+  transform: scaleY(1);
+  padding-bottom: 24px;
+  overflow: visible;
+  max-height: fit-content;
+  position: relative;
+  z-index: 5;
+}
+
 
 .nav__link{
   font-size: 18px;
