@@ -8,6 +8,7 @@ import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import SearchResults from '../SearchResults/SearchResults';
 import SavedArticles from '../SavedArticles/SavedArticles';
 import { Route } from 'react-router';
+import ModalWithForm from '../ModalWithForm/ModalWithForm';
 
 function App() {
 
@@ -28,6 +29,7 @@ function App() {
       </ProtectedRoute>
       <About/>
       <SearchResults/>
+      <ModalWithForm />
       <Footer/>
     </div>
   );
