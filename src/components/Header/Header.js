@@ -6,35 +6,40 @@ import './Header.css';
 function Header({onLogin, loggedIn}) {
   const {pathname} = useLocation();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  // const [darkMode, setDarkMode] = useState(pathname==='/articles')
-  const lightHeader = pathname==='/articles'
-  
-  //conditional NavBar
-  //navbar open, menu icon === X
+  const lightHeader = pathname === '/articles';
+
+  function toggleMenu() {
+    setIsMenuOpen(!isMenuOpen);
+  }
+
   return (
     <header className="header">
-      <div className={`overlay ${isMenuOpen? 'overlay_visible':''}`} onClick={()=>(setIsMenuOpen(!isMenuOpen))}></div>
+      <div
+        className={`overlay ${isMenuOpen ? 'overlay_visible' : ''}`}
+        onClick={toggleMenu}
+      ></div>
       <div
         className={`header__content ${
-          lightHeader
-            ? 'header__content_light'
-            : ''
+          lightHeader ? 'header__content_light' : ''
         }`}
       >
         <h2
-          className={`header__logo ${
-           lightHeader? 'header__logo_light' : ''
-          }`}
+          className={`header__logo ${lightHeader ? 'header__logo_light' : ''}`}
         >
           NewsExplorer
         </h2>
         <button
-          className={`header__menu ${lightHeader? 'header__menu_light':''} ${isMenuOpen? 'header__menu_open':''} ${(isMenuOpen && lightHeader)?'header__menu_open_light':''}`}
-          onClick={() => {
-            setIsMenuOpen(!isMenuOpen);
-          }}
+          className={`header__menu ${lightHeader ? 'header__menu_light' : ''} ${
+            isMenuOpen ? 'header__menu_open' : ''
+          } ${isMenuOpen && lightHeader ? 'header__menu_open_light' : ''}`}
+          onClick={toggleMenu}
         />
-        <Navigation onLogin={onLogin} loggedIn={loggedIn} isMenuOpen={isMenuOpen}/>
+        <Navigation
+          onLogin={onLogin}
+          loggedIn={loggedIn}
+          isMenuOpen={isMenuOpen}
+          lightHeader={lightHeader}
+        />
       </div>
     </header>
   );

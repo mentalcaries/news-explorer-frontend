@@ -1,9 +1,6 @@
-
-
 .nav {
   display: flex;
 }
-
 
 .nav__link {
   font-family: 'Roboto';
@@ -46,6 +43,12 @@
   z-index: 5;
 }
 
+.nav__button_user {
+  min-width: 122px;
+  padding: 0 19px;
+  justify-content: space-between;
+}
+
 .nav_light {
   color: #1a1b22;
 }
@@ -75,6 +78,11 @@
     font-size: 16px;
     line-height: 24px;
     height: 40px;
+  }
+
+  .nav__button_user {
+    min-width: 100px;
+    padding: 0 15px;
   }
 }
 @media screen and (max-width: 620px) {
@@ -112,5 +120,13 @@
     line-height: 24px;
     height: 56px;
     margin: 0;
+  }
+
+  .nav__button_user {
+    max-width: fit-content;
+    padding: 0 19px;
+  }
+  .nav__logout {
+    padding-left: 15px;
   }
 }

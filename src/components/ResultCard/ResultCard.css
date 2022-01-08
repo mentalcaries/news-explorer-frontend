@@ -19,14 +19,15 @@
 
 .save-button:hover {
   background-image: url('../../images/bookmark_hover.svg');
+  /* fill: #1a1b22; */
 }
 
 .save-button_active {
   background-image: url('../../images/bookmarked.svg');
-  transition:  transform 0.2s linear
+  transition:  0.2s linear
 }
 .save-button_active:hover {
-  transform: scale(1.05);
+  opacity: 0.8;
   background-image: url('../../images/bookmarked.svg');
 
 }
