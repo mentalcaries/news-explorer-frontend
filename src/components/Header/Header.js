@@ -13,6 +13,7 @@ function Header({onLogin, loggedIn}) {
   //navbar open, menu icon === X
   return (
     <header className="header">
+      <div className={`overlay ${isMenuOpen? 'overlay_visible':''}`} onClick={()=>(setIsMenuOpen(!isMenuOpen))}></div>
       <div
         className={`header__content ${
           lightHeader

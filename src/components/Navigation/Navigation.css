@@ -1,6 +1,9 @@
+
+
 .nav {
   display: flex;
 }
+
 
 .nav__link {
   font-family: 'Roboto';
@@ -14,6 +17,7 @@
   margin-right: 42px;
   margin-top: 30px;
   padding-bottom: 26px;
+  z-index: 5;
 }
 
 .nav__link_active {
@@ -39,6 +43,7 @@
   height: 48px;
   margin-top: 19px;
   cursor: pointer;
+  z-index: 5;
 }
 
 .nav_light {
@@ -56,14 +61,13 @@
 }
 
 @media screen and (max-width: 850px) {
-
-  .nav__link{
+  .nav__link {
     font-size: 16px;
     line-height: 24px;
     padding-bottom: 20px;
   }
 
-  .nav__link_active{
+  .nav__link_active {
     padding-bottom: 17px;
   }
 
@@ -74,42 +78,39 @@
   }
 }
 @media screen and (max-width: 620px) {
+  .nav {
+    flex-direction: column;
+    gap: 22px;
+    max-width: 288px;
+    padding-bottom: 0;
+    overflow: hidden;
+    transition: all 0.3s linear;
+    max-height: 0;
+    transform-origin: top;
+    transform: scaleY(0);
+  }
 
-.nav{
-  flex-direction: column;
-  gap: 22px;
-  max-width: 288px;
-  padding-bottom: 0;
-  overflow: hidden;
-  transition: all 0.3s linear;
-  max-height: 0;
-  transform-origin: top;
-  transform: scaleY(0);
-}
+  .nav_open {
+    transform: scaleY(1);
+    padding-bottom: 24px;
+    overflow: visible;
+    max-height: fit-content;
+    position: relative;
+    z-index: 5;
+  }
 
-.nav_open{
-  transform: scaleY(1);
-  padding-bottom: 24px;
-  overflow: visible;
-  max-height: fit-content;
-  position: relative;
-  z-index: 5;
-}
+  .nav__link {
+    font-size: 18px;
+    line-height: 56px;
+    margin: 0;
+    padding: 0;
+    align-self: flex-start;
+  }
 
-
-.nav__link{
-  font-size: 18px;
-  line-height: 56px;
-  margin: 0;
-  padding: 0;
-  align-self: flex-start;
-}
-
-.nav__button{
-  font-size: 18px;
-  line-height: 24px;
-  height: 56px;
-  margin:0;
-}
-
+  .nav__button {
+    font-size: 18px;
+    line-height: 24px;
+    height: 56px;
+    margin: 0;
+  }
 }

@@ -31,6 +31,7 @@ function Navigation({ onLogin, loggedIn, isMenuOpen }) {
         ) : (
           <button onClick={onLogin} className={`nav__button ${pathname==='/articles'? 'nav__button_light' :''}`}>User Signout</button>
           )}
+          
     </nav>
   );
 }

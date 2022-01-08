@@ -5,10 +5,27 @@
   align-self: center;
 }
 
+.overlay{
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  background-color: rgba(0,0,0,0.5);
+  overflow-x: hidden;
+  display: none;   
+}
+
+.overlay_visible{
+display: block;
+}
+
 .header__content {
   display: flex;
   justify-content: space-between;
   margin: 0 108px;
+  z-index: 5;
 }
 
 .header__logo {
@@ -68,6 +85,7 @@
     position: absolute;
     top: 16px;
     right: 16px;
+    z-index: 8;
   }
   .header__menu_light{
     background-image: url(../../images/menu-light.svg);
