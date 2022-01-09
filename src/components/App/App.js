@@ -43,15 +43,21 @@ function App() {
     setIsRegisterModalOpen(true);
   }
 
-  function closeAllPopups() {
+  function closeAllModals() {
     setIsRegisterModalOpen(false);
     setIsLoginModalOpen(false);
   }
 
   function handleOutsideClick(evt) {
     if (evt.target.className === 'modal__overlay') {
-      closeAllPopups();
+      closeAllModals();
     }
+  }
+
+  function switchModal(){
+    console.log('NO')
+    setIsLoginModalOpen(!isLoginModalOpen);
+    setIsRegisterModalOpen(!isRegisterModalOpen)
   }
 
   return (
@@ -66,16 +72,18 @@ function App() {
       <SearchResults />
       <Login
         isOpen={isLoginModalOpen}
-        onClose={closeAllPopups}
+        onClose={closeAllModals}
         onSubmit={handleLoginSubmit}
         setEmail={setEmail}
         email={email}
         password={password}
         setPassword={setPassword}
         onOutsideClick={handleOutsideClick}
+        onSwitchModal={switchModal}
       />
       <Register
         isOpen={isRegisterModalOpen}
+        onClose={closeAllModals}
         onSubmit={handleRegisterSubmit}
         setEmail={setEmail}
         email={email}
@@ -83,6 +91,9 @@ function App() {
         setPassword={setPassword}
         username={username}
         setUsername={setUsername}
+        onOutsideClick={handleOutsideClick}
+        onSwitchModal={switchModal}
+
       />
       <Footer />
     </div>

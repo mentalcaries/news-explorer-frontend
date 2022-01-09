@@ -13,6 +13,7 @@ function Register({
   password,
   username,
   setUsername,
+  onSwitchModal
 }) {
 
 function handleUsernameChange(evt){
@@ -21,7 +22,7 @@ function handleUsernameChange(evt){
 
   return (
     <ModalWithForm
-      title="Register"
+      title="Sign Up"
       isOpen={isOpen}
       onSubmit={onSubmit}
       onClose={onClose}
@@ -30,6 +31,8 @@ function handleUsernameChange(evt){
       email={email}
       password={password}
       setPassword={setPassword}
+      userOption="Sign In"
+      onSwitchModal={onSwitchModal}
     >
       <p className="modal__label">Username</p>
       <input

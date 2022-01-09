@@ -12,6 +12,8 @@ function ModalWithForm({
   setPassword,
   password,
   children,
+  userOption,
+  onSwitchModal
 }) {
 
   function handleEmailChange(evt){
@@ -57,9 +59,9 @@ function ModalWithForm({
             <span className={`modal__error`} id="password-error" >Password required</span>
               {children}
 
-            <button className="modal__submit">Sign In</button>
+            <button className="modal__submit">{userOption}</button>
           </form>
-          <p className="modal__text">or <span onClick={()=>console.log("CLOCK")} className="modal__span" style={{color:"red", cursor:"pointer"}}>Sign Up</span></p>
+          <p className="modal__text">or <span onClick={onSwitchModal} className="modal__span" style={{color:"red", cursor:"pointer"}}>Sign Up</span></p>
         </div>
       </div>
     </div>
