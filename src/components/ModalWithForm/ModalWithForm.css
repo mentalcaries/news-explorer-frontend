@@ -4,11 +4,17 @@
   position: fixed;
   top: 0;
   left: 0;
-  /* visibility: hidden; */
-  visibility: visible;
+  visibility: hidden;
   /* change opacity */
-  opacity: 1;
+  opacity: 0;
   transition: visibility 0.25s, opacity 0.25s linear;
+}
+
+.modal_opened{
+  visibility: visible;
+  opacity: 1;
+  transition: opacity 0.25s linear;
+  
 }
 
 .modal__overlay {
@@ -30,8 +36,10 @@
   color: #000;
   z-index: 2;
   box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.15);
-  border-radius: 10px;
+  border-radius: 16px;
   gap: 0;
+  position: relative;
+  z-index: 5;
 }
 
 .modal__close-btn {
@@ -44,6 +52,8 @@
   background-color: transparent;
   margin-top: -36px;
   margin-right: -36px;
+  align-self: flex-end;
+  cursor: pointer;
 }
 
 .modal__title {
@@ -53,12 +63,79 @@
   font-size: 24px;
   line-height: 28px;
   color: #1a1b22;
+  margin: 34px 26px 22px;
 }
 
-.modal__form{
-  max-width: 358px;
+.modal__form {
+  max-width: 360px;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin: 0 36px 37px;
+  margin: 0 36px;
+}
+
+.modal__label {
+  font-family: Inter;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 15px;
+  margin: 0 0 9px;
+  color: #2f71e5;
+}
+
+.modal__field {
+  font-family: Inter;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 17px;
+  color: #000000;
+  margin-bottom: 31px;
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  padding-bottom: 10px;
+}
+
+.modal__submit {
+  background: #2f71e5;
+  box-shadow: 0px 5px 15px rgba(14, 26, 57, 0.2);
+  border-radius: 100px;
+  border: none;
+  min-height: 64px;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 24px;
+  color: #ffffff;
+  cursor: pointer;
+  transition: linear 0.3s;
+}
+
+.modal__submit:hover {
+  background: #347eff;
+}
+
+.modal__text {
+  margin: 16px auto 28px;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 17px;
+  text-align: center;
+
+  color: #000000;
+}
+
+.modal__error {
+  font-family: Inter;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 15px;
+  color: #ff0000;
+  margin-top: -28px;
+  margin-bottom: 13px;
 }

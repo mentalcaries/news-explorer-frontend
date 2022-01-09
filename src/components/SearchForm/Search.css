@@ -39,6 +39,13 @@
   align-items: center;
   color: #ffffff;
   cursor: pointer;
+  transition: linear 0.3s;
+
+}
+
+.search__button{
+  background: #347EFF;
+
 }
 
 @media screen and (max-width: 800px) {

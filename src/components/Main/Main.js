@@ -1,5 +1,4 @@
 import { React } from 'react';
-import NewsCard from '../NewsCard/NewsCard';
 import Search from '../SearchForm/Search';
 import './Main.css';
 

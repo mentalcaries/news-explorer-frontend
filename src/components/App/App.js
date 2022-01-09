@@ -6,31 +6,85 @@ import Footer from '../Footer/Footer';
 import Header from '../Header/Header';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import SearchResults from '../SearchResults/SearchResults';
-import SavedArticles from '../SavedArticles/SavedArticles';
-import { Route } from 'react-router';
-import ModalWithForm from '../ModalWithForm/ModalWithForm';
+
+import {Route} from 'react-router';
+import Preloader from '../Preloader/Preloader';
+import SavedNews from '../SavedNews/SavedNews';
+import Login from '../Login/Login';
+import Register from '../Register/Register';
 
 function App() {
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState('');
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+  const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
 
-  const [loggedIn, setLoggedIn] = useState(true)
-  
-  function handleLogin(){
-    setLoggedIn(!loggedIn);
+  // function handleLogin() {
+  //   setLoggedIn(!loggedIn);
+  // }
+
+  function handleLoginSubmit(evt) {
+    evt.preventDefault();
+    console.log({email, password});
+  }
+
+  function handleRegisterSubmit(evt) {
+    evt.preventDefault();
+    console.log({email, password, username});
+  }
+
+  function handleLogin() {
+    setIsLoginModalOpen(true);
+  }
+
+  function handleRegister() {
+    setIsRegisterModalOpen(true);
+  }
+
+  function closeAllPopups() {
+    setIsRegisterModalOpen(false);
+    setIsLoginModalOpen(false);
+  }
+
+  function handleOutsideClick(evt) {
+    if (evt.target.className === 'modal__overlay') {
+      closeAllPopups();
+    }
   }
 
   return (
     <div className="app">
       <Header loggedIn={loggedIn} onLogin={handleLogin} />
-      <Route exact path='/'>
-      <Main />
+      <Route exact path="/">
+        <Main />
       </Route>
-      <ProtectedRoute  path='/articles' loggedIn={loggedIn} >
-        <SavedArticles/>
-      </ProtectedRoute>
-      <About/>
-      <SearchResults/>
-      <ModalWithForm />
-      <Footer/>
+      <ProtectedRoute path="/articles" loggedIn={loggedIn}></ProtectedRoute>
+      <About />
+      <SavedNews />
+      <SearchResults />
+      <Login
+        isOpen={isLoginModalOpen}
+        onClose={closeAllPopups}
+        onSubmit={handleLoginSubmit}
+        setEmail={setEmail}
+        email={email}
+        password={password}
+        setPassword={setPassword}
+        onOutsideClick={handleOutsideClick}
+      />
+      <Register
+        isOpen={isRegisterModalOpen}
+        onSubmit={handleRegisterSubmit}
+        setEmail={setEmail}
+        email={email}
+        password={password}
+        setPassword={setPassword}
+        username={username}
+        setUsername={setUsername}
+      />
+      <Footer />
     </div>
   );
 }

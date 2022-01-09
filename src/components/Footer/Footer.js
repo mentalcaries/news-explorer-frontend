@@ -2,6 +2,7 @@ import React from 'react';
 import './Footer.css';
 import fb_icon from '../../images/fb.svg';
 import gh_icon from '../../images/github.svg';
+import { Link } from 'react-router-dom';
 
 function Footer() {
   return (
@@ -12,8 +13,8 @@ function Footer() {
           </p>
               <div className="footer__items">
               	<div className="footer__links">
-                	<a href="http://jaggernauth.dev" className="footer__link" target="_blank" rel="noreferrer">Home</a>
-                  <a href="https://practicum.yandex.com" className="footer__link" target="_blank" rel="noreferrer">Practicum by Yandex</a>
+                	<Link to={'/'} className="footer__link">Home</Link>
+                  <Link to={'https://www.practicum.yandex.com'} className="footer__link">Practicum by Yandex</Link>
               </div>                
               <div className="footer__social-icons">
               	<a href="" className="footer__social-icon"><img src={gh_icon} alt="" /></a>
