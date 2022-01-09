@@ -139,3 +139,8 @@
   margin-top: -28px;
   margin-bottom: 13px;
 }
+
+.modal__span{
+  color:#2F71E5;
+  cursor: pointer;
+}

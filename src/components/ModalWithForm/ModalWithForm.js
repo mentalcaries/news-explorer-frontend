@@ -1,4 +1,5 @@
 import React from 'react';
+import { useState } from 'react/cjs/react.development';
 import './ModalWithForm.css';
 
 function ModalWithForm({
@@ -16,12 +17,17 @@ function ModalWithForm({
   onSwitchModal
 }) {
 
+  const [emailErrorMessage, setEmailErrorMesage] = useState('')
+  const [passwordErrorMessage, setPasswordErrorMesage] = useState('')
+  
   function handleEmailChange(evt){
     setEmail(evt.target.value)
+    setEmailErrorMesage(evt.target.validationMessage)
   }
 
   function handlePasswordChange(evt) {
     setPassword(evt.target.value);
+    setPasswordErrorMesage(evt.target.validationMessage)
   }
 
 
@@ -37,14 +43,14 @@ function ModalWithForm({
               Email
             </p>
             <input
-              type="text"
+              type="email"
               className="modal__field"
               placeholder="example@test.com"
               required
               onChange={handleEmailChange}
               value={email}
             />
-            <span className={`modal__error`} id="email-error" >Error Message</span>
+            <span className={`modal__error`} id="email-error" >{emailErrorMessage} </span>
 
             <p className="modal__label">Password</p>
             <input
@@ -56,12 +62,12 @@ function ModalWithForm({
               onChange={handlePasswordChange}
               value={password}
             />
-            <span className={`modal__error`} id="password-error" >Password required</span>
+            <span className={`modal__error`} id="password-error" >{passwordErrorMessage}</span>
               {children}
 
             <button className="modal__submit">{userOption}</button>
           </form>
-          <p className="modal__text">or <span onClick={onSwitchModal} className="modal__span" style={{color:"red", cursor:"pointer"}}>Sign Up</span></p>
+          <p className="modal__text">or <span onClick={onSwitchModal} className="modal__span">Sign Up</span></p>
         </div>
       </div>
     </div>

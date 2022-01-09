@@ -55,7 +55,6 @@ function App() {
   }
 
   function switchModal(){
-    console.log('NO')
     setIsLoginModalOpen(!isLoginModalOpen);
     setIsRegisterModalOpen(!isRegisterModalOpen)
   }
