@@ -12,6 +12,7 @@ import Preloader from '../Preloader/Preloader';
 import SavedNews from '../SavedNews/SavedNews';
 import Login from '../Login/Login';
 import Register from '../Register/Register';
+import { api } from '../utils/NewsApi';
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(true);
@@ -23,6 +24,9 @@ function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [searchTerms, setSearchTerms] = useState('')
 
+
+    // api.getNews('dogs')
+    // .then(data=>console.log(data))
 
   function handleLoginSubmit(evt) {
     evt.preventDefault();
