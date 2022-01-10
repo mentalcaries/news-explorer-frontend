@@ -20,10 +20,8 @@ function App() {
   const [username, setUsername] = useState('');
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  // function handleLogin() {
-  //   setLoggedIn(!loggedIn);
-  // }
 
   function handleLoginSubmit(evt) {
     evt.preventDefault();
@@ -37,10 +35,12 @@ function App() {
 
   function handleLogin() {
     setIsLoginModalOpen(true);
+    setIsMenuOpen(false)
   }
 
   function handleRegister() {
     setIsRegisterModalOpen(true);
+    //Header menu may have to be closed here as well
   }
 
   function closeAllModals() {
@@ -61,7 +61,7 @@ function App() {
 
   return (
     <div className="app">
-      <Header loggedIn={loggedIn} onLogin={handleLogin} />
+      <Header loggedIn={loggedIn} onLogin={handleLogin} isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
       <Route exact path="/">
         <Main />
       </Route>

@@ -3,9 +3,8 @@ import {useLocation} from 'react-router';
 import Navigation from '../Navigation/Navigation';
 import './Header.css';
 
-function Header({onLogin, loggedIn}) {
+function Header({onLogin, loggedIn, isMenuOpen, setIsMenuOpen}) {
   const {pathname} = useLocation();
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const lightHeader = pathname === '/articles';
 
   function toggleMenu() {

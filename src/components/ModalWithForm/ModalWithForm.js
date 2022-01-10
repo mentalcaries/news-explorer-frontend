@@ -17,9 +17,10 @@ function ModalWithForm({
   onSwitchModal
 }) {
 
-  const [emailErrorMessage, setEmailErrorMesage] = useState('')
-  const [passwordErrorMessage, setPasswordErrorMesage] = useState('')
-  
+  const [emailErrorMessage, setEmailErrorMesage] = useState('');
+  const [passwordErrorMessage, setPasswordErrorMesage] = useState('');
+  const [isFormValid, setIsFormValid] = useState(false)
+
   function handleEmailChange(evt){
     setEmail(evt.target.value)
     setEmailErrorMesage(evt.target.validationMessage)
@@ -30,6 +31,11 @@ function ModalWithForm({
     setPasswordErrorMesage(evt.target.validationMessage)
   }
 
+  function handleFormValidation(evt){
+    setIsFormValid(evt.target.validity.valid)
+    //Validation should be set for both fields depending on requirements
+    //To recheck with back end
+  }
 
   return (
     <div className={`modal ${isOpen? 'modal_opened': ''}`} >
@@ -38,7 +44,7 @@ function ModalWithForm({
           <button onClick={onClose} className="modal__close-btn"></button>
           <h2 className="modal__title">{title}</h2>
 
-          <form action="" className="modal__form"  noValidate onSubmit={onSubmit}>
+          <form action="" className="modal__form"  noValidate onSubmit={onSubmit} onChange={handleFormValidation} >
             <p className="modal__label" type="email" name="email">
               Email
             </p>
@@ -61,11 +67,12 @@ function ModalWithForm({
               required
               onChange={handlePasswordChange}
               value={password}
+              minLength={8}
             />
             <span className={`modal__error`} id="password-error" >{passwordErrorMessage}</span>
               {children}
 
-            <button className="modal__submit">{userOption}</button>
+            <button className={`modal__submit ${isFormValid? '' :'modal__submit_disabled'}`} disabled={isFormValid? false: true}>{userOption}</button>
           </form>
           <p className="modal__text">or <span onClick={onSwitchModal} className="modal__span">Sign Up</span></p>
         </div>
