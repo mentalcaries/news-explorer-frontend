@@ -1,13 +1,26 @@
-import { React } from "react";
-import "./Search.css";
+import React from 'react';
+import './Search.css';
 
-function Search() {
+function Search({searchTerms, setSearchTerms, onSubmit}) {
+
+  function handleSearchChange(evt) {
+    setSearchTerms(evt.target.value);
+  
+  }
+
   return (
-    <div className="search">
-        <div className="search__items"></div>
-      <input type="text" placeholder="Enter topic" className="search__field" />
-      <button className="search__button" type="submit">Search</button>
-    </div>
+    <form className="search" onSubmit={onSubmit}>
+      <input
+        type="text"
+        placeholder="Enter topic"
+        className="search__field"
+        value={searchTerms}
+        onChange={handleSearchChange}
+      />
+      <button className="search__button" type="submit">
+        Search
+      </button>
+    </form>
   );
 }
 

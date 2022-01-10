@@ -14,13 +14,14 @@ import Login from '../Login/Login';
 import Register from '../Register/Register';
 
 function App() {
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(true);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [username, setUsername] = useState('');
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [searchTerms, setSearchTerms] = useState('')
 
 
   function handleLoginSubmit(evt) {
@@ -31,6 +32,11 @@ function App() {
   function handleRegisterSubmit(evt) {
     evt.preventDefault();
     console.log({email, password, username});
+  }
+
+  function handleSearchSubmit(evt){
+    evt.preventDefault();
+    console.log(searchTerms)
   }
 
   function handleLogin() {
@@ -63,7 +69,7 @@ function App() {
     <div className="app">
       <Header loggedIn={loggedIn} onLogin={handleLogin} isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
       <Route exact path="/">
-        <Main />
+        <Main onSubmit={handleSearchSubmit} searchTerms={searchTerms} setSearchTerms={setSearchTerms} />
       </Route>
       <ProtectedRoute path="/articles" loggedIn={loggedIn}></ProtectedRoute>
       <About />

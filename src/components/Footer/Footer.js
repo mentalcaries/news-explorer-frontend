@@ -17,8 +17,8 @@ function Footer() {
                   <Link to={'https://www.practicum.yandex.com'} className="footer__link">Practicum by Yandex</Link>
               </div>                
               <div className="footer__social-icons">
-              	<a href="" className="footer__social-icon"><img src={gh_icon} alt="" /></a>
-                <a href="" className="footer__social-icon"><img src={fb_icon} alt="" /></a>
+              	<a href="https://www.github.com/mentalcaries" className="footer__social-icon"><img src={gh_icon} alt="" /></a>
+                <a href="https://www.facebook.com" className="footer__social-icon"><img src={fb_icon} alt="" /></a>
                 </div>
               </div>
       </div>
