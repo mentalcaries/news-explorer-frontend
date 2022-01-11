@@ -2,7 +2,7 @@ import React from 'react';
 import Search from '../SearchForm/Search';
 import './Main.css';
 
-function Main({searchTerms, setSearchTerms, onSubmit}) {
+function Main({onSubmit}) {
   return (
     <section className="main">
       <div className="main__text">
@@ -14,8 +14,6 @@ function Main({searchTerms, setSearchTerms, onSubmit}) {
       </div>
       <Search
         onSubmit={onSubmit}
-        searchTerms={searchTerms}
-        setSearchTerms={setSearchTerms}
       />
     </section>
   );

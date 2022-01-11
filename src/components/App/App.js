@@ -22,11 +22,9 @@ function App() {
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [searchTerms, setSearchTerms] = useState('')
+  // const [searchQuery, setSearchQuery] = useState('')
+  const [articles, setArticles] = useState([]);
 
-
-    api.getNews('dogs')
-    .then(data=>console.log(data.articles))
 
   function handleLoginSubmit(evt) {
     evt.preventDefault();
@@ -38,9 +36,15 @@ function App() {
     console.log({email, password, username});
   }
 
-  function handleSearchSubmit(evt){
-    evt.preventDefault();
-    console.log(searchTerms)
+
+  //get search result from Search component
+  function handleSearchSubmit(query){
+    api.getNews(query)
+    .then((data)=>{
+      data.articles && setArticles(data.articles)
+    })
+    .then(localStorage.setItem('searchResults', JSON.stringify(articles)))
+    .catch(console.log("Some kind of error"))
   }
 
   function handleLogin() {
@@ -73,12 +77,11 @@ function App() {
     <div className="app">
       <Header loggedIn={loggedIn} onLogin={handleLogin} isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
       <Route exact path="/">
-        <Main onSubmit={handleSearchSubmit} searchTerms={searchTerms} setSearchTerms={setSearchTerms} />
+        <Main onSubmit={handleSearchSubmit}  />
       </Route>
       <ProtectedRoute path="/articles" loggedIn={loggedIn}></ProtectedRoute>
-      <About />
-      <SavedNews />
       <SearchResults />
+      <About />
       <Login
         isOpen={isLoginModalOpen}
         onClose={closeAllModals}

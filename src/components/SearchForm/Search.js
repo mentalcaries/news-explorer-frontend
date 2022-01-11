@@ -2,21 +2,22 @@ import React from 'react';
 import { useState } from 'react/cjs/react.development';
 import './Search.css';
 
-function Search({searchTerms, setSearchTerms, onSubmit}) {
+function Search({searchQuery, setSearchQuery, onSubmit}) {
 
 
   const [placeholder, setPlaceholder] = useState("Enter topic")
+  const [query, setQuery] = useState('')
 
   function handleSearchChange(evt) {
-    setSearchTerms(evt.target.value);
+    setQuery(evt.target.value);
   }
 
   function handleSearchSubmit(evt){
     evt.preventDefault()
-    if (searchTerms===''){
-      setPlaceholder('Please enter some keywords')
+    if (query===''){
+      return setPlaceholder('Please enter some keywords')
     }
-    onSubmit(searchTerms)
+    onSubmit(query)
   }
 
 
@@ -26,7 +27,7 @@ function Search({searchTerms, setSearchTerms, onSubmit}) {
         type="text"
         placeholder={placeholder}
         className="search__field"
-        value={searchTerms}
+        value={query}
         onChange={handleSearchChange}
       />
       <button className="search__button" type="submit">
