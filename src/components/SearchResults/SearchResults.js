@@ -5,23 +5,26 @@ import ResultCard from '../ResultCard/ResultCard';
 import './SearchResults.css';
 
 function SearchResults({articles, isLoading}) {
+  
+  const CARDS_RETURNED = 3;
   const [moreCards, setMoreCards] = useState(0);
 
   function handleShowMore() {
-    setMoreCards(moreCards + 3);
+    setMoreCards(moreCards + CARDS_RETURNED);
   }
 
-  const newsList = articles.slice(0, 3 + moreCards);
+  const newsList = articles.slice(0, CARDS_RETURNED + moreCards);
 
 
 
   return (
     <section className="results">
       <div className="results__wrapper">
+
         <h2 className="results__title">Search results</h2>
         <div className="results__cards">
           
-          { isLoading? <Preloader/> : newsList.map((card) => {
+          { newsList.map((card) => {
             return ( 
               <ResultCard card={card} key={card.source.id + card.publishedAt} />
               );

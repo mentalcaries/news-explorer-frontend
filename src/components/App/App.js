@@ -87,7 +87,11 @@ function App() {
         <Main onSubmit={handleSearchSubmit} />
       </Route>
       <ProtectedRoute path="/articles" loggedIn={loggedIn}></ProtectedRoute>
-      <SearchResults articles={articles} isLoading={isLoading} />
+      {isLoading && <Preloader/> }
+
+      {/* Return error block here if no results found */}
+
+      <SearchResults articles={articles}/>
       
       <About />
       <Login
