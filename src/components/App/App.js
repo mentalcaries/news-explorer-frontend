@@ -25,8 +25,8 @@ function App() {
   const [searchTerms, setSearchTerms] = useState('')
 
 
-    // api.getNews('dogs')
-    // .then(data=>console.log(data))
+    api.getNews('dogs')
+    .then(data=>console.log(data.articles))
 
   function handleLoginSubmit(evt) {
     evt.preventDefault();
