@@ -4,7 +4,7 @@ import './Preloader.css';
 function Preloader() {
   return (
     <div className="preloader">
-      <i class="circle-preloader"></i>
+      <i className="circle-preloader"></i>
     </div>
   );
 }

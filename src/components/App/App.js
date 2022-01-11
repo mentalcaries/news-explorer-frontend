@@ -12,7 +12,7 @@ import Preloader from '../Preloader/Preloader';
 import SavedNews from '../SavedNews/SavedNews';
 import Login from '../Login/Login';
 import Register from '../Register/Register';
-import { api } from '../utils/NewsApi';
+import {api} from '../utils/NewsApi';
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(true);
@@ -22,9 +22,10 @@ function App() {
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  // const [searchQuery, setSearchQuery] = useState('')
-  const [articles, setArticles] = useState([]);
-
+  const [articles, setArticles] = useState(
+    JSON.parse(localStorage.getItem('searchResults'))
+  );
+  const [isLoading, setIsLoading] = useState(false);
 
   function handleLoginSubmit(evt) {
     evt.preventDefault();
@@ -36,20 +37,21 @@ function App() {
     console.log({email, password, username});
   }
 
-
   //get search result from Search component
-  function handleSearchSubmit(query){
-    api.getNews(query)
-    .then((data)=>{
-      data.articles && setArticles(data.articles)
-    })
-    .then(localStorage.setItem('searchResults', JSON.stringify(articles)))
-    .catch(console.log("Some kind of error"))
+  function handleSearchSubmit(query) {
+    setIsLoading(true)
+    api.getNews(query).then((data) => {
+      setArticles(data.articles);
+      localStorage.setItem('searchResults', JSON.stringify(data.articles));
+      setIsLoading(false)
+    });
+    // .then(articles && localStorage.setItem('searchResults', JSON.stringify(articles)))
+    //add catch statement
   }
 
   function handleLogin() {
     setIsLoginModalOpen(true);
-    setIsMenuOpen(false)
+    setIsMenuOpen(false);
   }
 
   function handleRegister() {
@@ -68,19 +70,25 @@ function App() {
     }
   }
 
-  function switchModal(){
+  function switchModal() {
     setIsLoginModalOpen(!isLoginModalOpen);
-    setIsRegisterModalOpen(!isRegisterModalOpen)
+    setIsRegisterModalOpen(!isRegisterModalOpen);
   }
 
   return (
     <div className="app">
-      <Header loggedIn={loggedIn} onLogin={handleLogin} isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
+      <Header
+        loggedIn={loggedIn}
+        onLogin={handleLogin}
+        isMenuOpen={isMenuOpen}
+        setIsMenuOpen={setIsMenuOpen}
+      />
       <Route exact path="/">
-        <Main onSubmit={handleSearchSubmit}  />
+        <Main onSubmit={handleSearchSubmit} />
       </Route>
       <ProtectedRoute path="/articles" loggedIn={loggedIn}></ProtectedRoute>
-      <SearchResults />
+      <SearchResults articles={articles} isLoading={isLoading} />
+      
       <About />
       <Login
         isOpen={isLoginModalOpen}
@@ -105,7 +113,6 @@ function App() {
         setUsername={setUsername}
         onOutsideClick={handleOutsideClick}
         onSwitchModal={switchModal}
-
       />
       <Footer />
     </div>

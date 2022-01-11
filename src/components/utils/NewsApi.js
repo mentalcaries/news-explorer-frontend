@@ -16,7 +16,7 @@ class NewsApi {
     const currentDate = new Date(Date.now()).toISOString().substring(0,19)
     const prev7 = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString().substring(0,19);
 
-    return fetch(`${this.baseUrl}/everything?q=${query}&from=${prev7}&to=${currentDate}&pageSize=5`, {
+    return fetch(`${this.baseUrl}/everything?q=${query}&from=${prev7}&to=${currentDate}&pageSize=100`, {
       method: 'GET',
       headers:{
         'X-Api-Key': '9e0827e7e0fa48c3a9c54fa84bc818ec'
