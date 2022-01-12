@@ -26,7 +26,7 @@ function App() {
     JSON.parse(localStorage.getItem('searchResults'))
   );
   const [isLoading, setIsLoading] = useState(false);
-  const [noResult, setNoResult] = useState(false);
+  const [searchSubmitted, setSearchSubmitted] = useState(false);
 
   function handleLoginSubmit(evt) {
     evt.preventDefault();
@@ -47,6 +47,7 @@ function App() {
         setArticles(data.articles);
         localStorage.setItem('searchResults', JSON.stringify(data.articles));
         setIsLoading(false);
+        setSearchSubmitted(true);
       })
       .catch((err) => console.log(`Something went wrong: ${err}`));
   }
@@ -87,12 +88,17 @@ function App() {
       />
       <Route exact path="/">
         <Main onSubmit={handleSearchSubmit} />
-      {isLoading && <Preloader />}
+        {isLoading && <Preloader />}
 
-      {articles.length===0 ? <NoResult /> : <SearchResults articles={articles} />}
+        {searchSubmitted &&
+          (articles.length === 0 ? (
+            <NoResult />
+          ) : (
+            <SearchResults articles={articles} />
+          ))}
       </Route>
       <ProtectedRoute path="/articles" loggedIn={loggedIn}>
-        <SavedNews/>
+        <SavedNews />
       </ProtectedRoute>
       <About />
       <Login
