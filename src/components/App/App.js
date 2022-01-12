@@ -6,13 +6,13 @@ import Footer from '../Footer/Footer';
 import Header from '../Header/Header';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import SearchResults from '../SearchResults/SearchResults';
-
+import SavedNews from '../SavedNews/SavedNews';
 import {Route} from 'react-router';
 import Preloader from '../Preloader/Preloader';
-import SavedNews from '../SavedNews/SavedNews';
 import Login from '../Login/Login';
 import Register from '../Register/Register';
 import {api} from '../utils/NewsApi';
+import NoResult from '../NoResult/NoResult';
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(true);
@@ -26,6 +26,7 @@ function App() {
     JSON.parse(localStorage.getItem('searchResults'))
   );
   const [isLoading, setIsLoading] = useState(false);
+  const [noResult, setNoResult] = useState(false);
 
   function handleLoginSubmit(evt) {
     evt.preventDefault();
@@ -39,14 +40,15 @@ function App() {
 
   //get search result from Search component
   function handleSearchSubmit(query) {
-    setIsLoading(true)
-    api.getNews(query).then((data) => {
-      setArticles(data.articles);
-      localStorage.setItem('searchResults', JSON.stringify(data.articles));
-      setIsLoading(false)
-    });
-    // .then(articles && localStorage.setItem('searchResults', JSON.stringify(articles)))
-    //add catch statement
+    setIsLoading(true);
+    api
+      .getNews(query)
+      .then((data) => {
+        setArticles(data.articles);
+        localStorage.setItem('searchResults', JSON.stringify(data.articles));
+        setIsLoading(false);
+      })
+      .catch((err) => console.log(`Something went wrong: ${err}`));
   }
 
   function handleLogin() {
@@ -85,14 +87,13 @@ function App() {
       />
       <Route exact path="/">
         <Main onSubmit={handleSearchSubmit} />
+      {isLoading && <Preloader />}
+
+      {articles.length===0 ? <NoResult /> : <SearchResults articles={articles} />}
       </Route>
-      <ProtectedRoute path="/articles" loggedIn={loggedIn}></ProtectedRoute>
-      {isLoading && <Preloader/> }
-
-      {/* Return error block here if no results found */}
-
-      <SearchResults articles={articles}/>
-      
+      <ProtectedRoute path="/articles" loggedIn={loggedIn}>
+        <SavedNews/>
+      </ProtectedRoute>
       <About />
       <Login
         isOpen={isLoginModalOpen}

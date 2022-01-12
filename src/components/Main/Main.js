@@ -12,9 +12,7 @@ function Main({onSubmit}) {
           account.
         </p>
       </div>
-      <Search
-        onSubmit={onSubmit}
-      />
+      <Search onSubmit={onSubmit} />
     </section>
   );
 }

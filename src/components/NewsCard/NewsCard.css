@@ -6,7 +6,6 @@
   overflow: hidden;
   position: relative;
   filter: drop-shadow(10px 10px 10px rgba(8, 29, 45, 0.1));
-  
 }
 
 .newscard__image {
@@ -30,9 +29,11 @@
   max-width: 352px;
   margin: 20px auto 24px;
   height: 260px;
+  padding: 0 24px;
+}
 
-  padding: 0 24px
-
+.newscard__link{
+  text-decoration: none;
 }
 
 .newscard__title {
@@ -43,6 +44,10 @@
   line-height: 30px;
   color: #1a1b22;
   margin: 12px 0 16px;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .newscard__paragraph {
@@ -55,10 +60,9 @@
   color: #1a1b22;
   margin: 0;
   display: -webkit-box;
-  -webkit-line-clamp: 5;
+  -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
-
 }
 
 .newscard__source {
@@ -103,13 +107,13 @@
     text-overflow: ellipsis;
   }
 
-  .newscard__source{
+  .newscard__source {
     margin-top: 12px;
   }
 }
 
-@media screen and (max-width: 750px){
-  .newscard{
+@media screen and (max-width: 750px) {
+  .newscard {
     width: 288px;
     height: 440px;
   }
@@ -122,12 +126,11 @@
     padding: 0 16px;
   }
 
-  .newscard__title{
+  .newscard__title {
     margin: 8px 0 10px;
   }
 
-  .newscard__source{
+  .newscard__source {
     margin-top: 8px;
   }
 }
-

@@ -19,7 +19,7 @@ class NewsApi {
     return fetch(`${this.baseUrl}/everything?q=${query}&from=${prev7}&to=${currentDate}&pageSize=100`, {
       method: 'GET',
       headers:{
-        'X-Api-Key': '9e0827e7e0fa48c3a9c54fa84bc818ec'
+        'X-Api-Key': 'dd0ddf2623e644a881674884ed750c54'
       }
     }).then(this._checkRes);
   }

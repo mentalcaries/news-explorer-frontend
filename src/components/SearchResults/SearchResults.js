@@ -1,34 +1,29 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import {useState} from 'react/cjs/react.development';
-import Preloader from '../Preloader/Preloader';
+
 import ResultCard from '../ResultCard/ResultCard';
 import './SearchResults.css';
 
 function SearchResults({articles, isLoading}) {
-  
-  const CARDS_RETURNED = 3;
+  const CARDS_RENDERED = 3;
   const [moreCards, setMoreCards] = useState(0);
 
   function handleShowMore() {
-    setMoreCards(moreCards + CARDS_RETURNED);
+    setMoreCards(moreCards + CARDS_RENDERED);
   }
 
-  const newsList = articles.slice(0, CARDS_RETURNED + moreCards);
-
-
+  const newsList = articles.slice(0, CARDS_RENDERED + moreCards);
 
   return (
     <section className="results">
       <div className="results__wrapper">
-
         <h2 className="results__title">Search results</h2>
         <div className="results__cards">
-          
-          { newsList.map((card) => {
-            return ( 
+          {newsList.map((card) => {
+            return (
               <ResultCard card={card} key={card.source.id + card.publishedAt} />
-              );
-            })}
+            );
+          })}
         </div>
         <div className="results__button">
           {newsList.length !== articles.length && (
