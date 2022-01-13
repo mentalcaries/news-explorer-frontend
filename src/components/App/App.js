@@ -90,11 +90,11 @@ function App() {
         <Main onSubmit={handleSearchSubmit} />
         {isLoading && <Preloader />}
 
-        {searchSubmitted &&
-          (articles.length === 0 ? (
-            <NoResult />
-          ) : (
+        {
+          (articles.length > 0 ? (
             <SearchResults articles={articles} />
+            ) : (
+              <NoResult />
           ))}
       <About />
       </Route>
