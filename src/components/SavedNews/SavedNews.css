@@ -19,9 +19,13 @@
 }
 
 @media screen and (max-width: 800px) {
+  .saved{
+    padding: 24px 0;
+  }
+  
   .saved__articles {
     gap: 8px;
-  }
+  }  
 }
 
 @media screen and (max-width: 750px) {
@@ -30,7 +34,12 @@
   }
 }
 @media screen and (max-width: 615px) {
+
+  .saved{
+    padding: 8px 0;
+  }
   .saved__articles {
     gap: 10px;
+    padding:24px 16px;
   }
 }

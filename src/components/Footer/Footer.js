@@ -11,16 +11,16 @@ function Footer() {
           <p className="footer__text">
             &copy;{new Date().getFullYear()} Devin Jaggernauth | Practicum
           </p>
-              <div className="footer__items">
+              <nav className="footer__items">
               	<div className="footer__links">
                 	<Link to={'/'} className="footer__link">Home</Link>
-                  <Link to={'https://www.practicum.yandex.com'} className="footer__link">Practicum by Yandex</Link>
+                  <a href='https://practicum.yandex.com' className="footer__link" target="_blank" rel='noreferrer' >Practicum by Yandex</a>
               </div>                
               <div className="footer__social-icons">
-              	<a href="https://www.github.com/mentalcaries" className="footer__social-icon"><img src={gh_icon} alt="" /></a>
-                <a href="https://www.facebook.com" className="footer__social-icon"><img src={fb_icon} alt="" /></a>
+              	<a href="https://www.github.com/mentalcaries" className="footer__social-icon" target="_blank" rel='noreferrer' ><img src={gh_icon} alt="" /></a>
+                <a href="https://www.facebook.com" className="footer__social-icon" target="_blank" rel='noreferrer'><img src={fb_icon} alt="" /></a>
                 </div>
-              </div>
+              </nav>
       </div>
     </footer>
   );

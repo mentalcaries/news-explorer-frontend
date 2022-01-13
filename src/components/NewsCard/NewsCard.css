@@ -101,9 +101,8 @@
   }
 
   .newscard__paragraph {
-    height: 88px;
+    max-height: 88px;
     width: 100%;
-    -webkit-line-clamp: 4;
     text-overflow: ellipsis;
   }
 

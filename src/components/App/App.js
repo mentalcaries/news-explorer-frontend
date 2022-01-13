@@ -96,11 +96,11 @@ function App() {
           ) : (
             <SearchResults articles={articles} />
           ))}
+      <About />
       </Route>
       <ProtectedRoute path="/articles" loggedIn={loggedIn}>
         <SavedNews />
       </ProtectedRoute>
-      <About />
       <Login
         isOpen={isLoginModalOpen}
         onClose={closeAllModals}
