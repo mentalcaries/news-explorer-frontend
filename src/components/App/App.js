@@ -13,6 +13,7 @@ import Login from '../Login/Login';
 import Register from '../Register/Register';
 import {api} from '../utils/NewsApi';
 import NoResult from '../NoResult/NoResult';
+import { useEffect } from 'react/cjs/react.production.min';
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(true);
@@ -90,13 +91,12 @@ function App() {
         <Main onSubmit={handleSearchSubmit} />
         {isLoading && <Preloader />}
 
-        {
-          (articles.length > 0 ? (
-            <SearchResults articles={articles} />
-            ) : (
-              <NoResult />
-          ))}
-      <About />
+        {articles!== null && (articles.length > 0 ? (
+          <SearchResults articles={articles} />
+        ) : (
+          searchSubmitted && <NoResult />
+        ))}
+        <About />
       </Route>
       <ProtectedRoute path="/articles" loggedIn={loggedIn}>
         <SavedNews />
