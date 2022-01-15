@@ -4,7 +4,7 @@ import {useState} from 'react/cjs/react.development';
 import ResultCard from '../ResultCard/ResultCard';
 import './SearchResults.css';
 
-function SearchResults({articles, isLoading}) {
+function SearchResults({articles, isLoading, handleLogin}) {
   const CARDS_RENDERED = 3;
   const [moreCards, setMoreCards] = useState(0);
 
@@ -21,7 +21,7 @@ function SearchResults({articles, isLoading}) {
         <div className="results__cards">
           {newsList.map((card) => {
             return (
-              <ResultCard card={card} key={card.source.id + card.publishedAt} />
+              <ResultCard card={card} key={card.source.id + card.publishedAt} handleLogin={handleLogin} />
             );
           })}
         </div>

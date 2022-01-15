@@ -1,7 +1,7 @@
 import React from "react";
 import './ModalAlert.css'
 
-function ModalAlert({isOpen, onClose, onOutsideClick}){
+function ModalAlert({isOpen, onClose, onOutsideClick, onLoginClick}){
   return(
 <div className={`modal-alert ${isOpen? 'modal-alert_opened': ''}`} >
       <div className="modal-alert__overlay" onClick={onOutsideClick}>
@@ -10,7 +10,7 @@ function ModalAlert({isOpen, onClose, onOutsideClick}){
           <h2 className="modal-alert__title">Registration successfully completed</h2>
 
           
-          <p className="modal-alert__text">Sign In</p>
+          <p onClick={onLoginClick} className="modal-alert__text">Sign In</p>
         </div>
       </div>
     </div>

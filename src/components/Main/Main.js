@@ -2,7 +2,7 @@ import React from 'react';
 import Search from '../SearchForm/Search';
 import './Main.css';
 
-function Main({onSubmit}) {
+function Main({onSubmit, handleLogin}) {
   return (
     <section className="main">
       <div className="main__text">
@@ -12,7 +12,7 @@ function Main({onSubmit}) {
           account.
         </p>
       </div>
-      <Search onSubmit={onSubmit} />
+      <Search onSubmit={onSubmit}/>
     </section>
   );
 }

@@ -17,10 +17,12 @@ function ResultCard(props) {
           setBookmarkHover(true);
         }}
         onMouseLeave={() => {
-          setBookmarkHover(false);
+
+          setTimeout(()=>setBookmarkHover(false), 1000)
         }}
       />
-      <button className={`tooltip ${bookmarkHover ? 'tooltip_visible' : ''}`}>
+      <button className={`tooltip ${bookmarkHover ? 'tooltip_visible' : ''}`} onClick={props.handleLogin}
+      >
         Sign in to save article
       </button>
     </NewsCard>

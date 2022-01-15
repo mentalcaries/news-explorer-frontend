@@ -13,7 +13,7 @@ import Login from '../Login/Login';
 import Register from '../Register/Register';
 import {api} from '../utils/NewsApi';
 import NoResult from '../NoResult/NoResult';
-import { useEffect } from 'react/cjs/react.production.min';
+import {useEffect} from 'react/cjs/react.production.min';
 import ModalAlert from '../ModalAlert/ModalAlert';
 
 function App() {
@@ -24,7 +24,7 @@ function App() {
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const[isAlertOpen, setIsAlertOpen] = useState(true)
+  const [isAlertOpen, setIsAlertOpen] = useState(false);
   const [articles, setArticles] = useState(
     JSON.parse(localStorage.getItem('searchResults'))
   );
@@ -32,20 +32,19 @@ function App() {
   const [searchSubmitted, setSearchSubmitted] = useState(false);
   // const [showHeader, setShowHeader] = useState(true);
 
-    const modalOpened = isLoginModalOpen || isRegisterModalOpen || isAlertOpen
-    console.log(modalOpened)
+  const modalOpened = isLoginModalOpen || isRegisterModalOpen || isAlertOpen;
 
   function handleLoginSubmit(evt) {
     evt.preventDefault();
-    setLoggedIn(true)
+    setLoggedIn(true);
     console.log({email, password});
-    setIsLoginModalOpen(false)
+    setIsLoginModalOpen(false);
   }
 
   function handleRegisterSubmit(evt) {
     evt.preventDefault();
     console.log({email, password, username});
-    setIsAlertOpen(true)
+    setIsAlertOpen(true);
   }
 
   //get search result from Search component
@@ -63,6 +62,7 @@ function App() {
   }
 
   function handleLogin() {
+    closeAllModals();
     setIsLoginModalOpen(true);
     setIsMenuOpen(false);
   }
@@ -72,22 +72,35 @@ function App() {
     //Header menu may have to be closed here as well
   }
 
-  function handleAlert(){
-    setIsAlertOpen(true)
+  function handleAlert() {
+    setIsAlertOpen(true);
   }
 
   function closeAllModals() {
     setIsRegisterModalOpen(false);
     setIsLoginModalOpen(false);
-    setIsAlertOpen(false)
-
+    setIsAlertOpen(false);
   }
 
   function handleOutsideClick(evt) {
-    if (evt.target.className === 'modal__overlay') {
+    if (
+      evt.target.className === 'modal__overlay' ||
+      evt.target.className === 'modal-alert__overlay'
+    ) {
       closeAllModals();
     }
   }
+
+  React.useEffect(() => {
+    const closeByEscape = (e) => {
+      if (e.key === 'Escape') {
+        closeAllModals();
+      }
+    };
+
+    modalOpened && document.addEventListener('keydown', closeByEscape);
+    return () => document.removeEventListener('keydown', closeByEscape);
+  }, [modalOpened]);
 
   function switchModal() {
     setIsLoginModalOpen(!isLoginModalOpen);
@@ -107,11 +120,12 @@ function App() {
         <Main onSubmit={handleSearchSubmit} />
         {isLoading && <Preloader />}
 
-        {articles!== null && (articles.length > 0 ? (
-          <SearchResults articles={articles} />
-        ) : (
-          searchSubmitted && <NoResult />
-        ))}
+        {articles !== null &&
+          (articles.length > 0 ? (
+            <SearchResults articles={articles} handleLogin={handleLogin}/>
+          ) : (
+            searchSubmitted && <NoResult />
+          ))}
         <About />
       </Route>
       <ProtectedRoute path="/articles" loggedIn={loggedIn}>
@@ -141,7 +155,12 @@ function App() {
         onOutsideClick={handleOutsideClick}
         onSwitchModal={switchModal}
       />
-      <ModalAlert isOpen={isAlertOpen} onClose={closeAllModals}/>
+      <ModalAlert
+        isOpen={isAlertOpen}
+        onClose={closeAllModals}
+        onOutsideClick={handleOutsideClick}
+        onLoginClick={handleLogin}
+      />
       <Footer />
     </div>
   );

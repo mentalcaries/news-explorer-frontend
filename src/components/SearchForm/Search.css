@@ -39,13 +39,15 @@
   align-items: center;
   color: #ffffff;
   cursor: pointer;
-  transition: linear 0.3s;
-
+  transition: linear 0.1s;
 }
 
-.search__button{
-  background: #347EFF;
+.search__button_hover {
+  background: #347eff;
+}
 
+.search__button_clicked {
+  background: #2a65cc;
 }
 
 @media screen and (max-width: 800px) {

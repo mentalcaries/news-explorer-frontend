@@ -1,25 +1,24 @@
 import React from 'react';
-import { useState } from 'react/cjs/react.development';
+import {useState} from 'react/cjs/react.development';
 import './Search.css';
 
-function Search({searchQuery, setSearchQuery, onSubmit}) {
-
-
-  const [placeholder, setPlaceholder] = useState("Enter topic")
-  const [query, setQuery] = useState('')
+function Search({searchQuery, setSearchQuery, onSubmit,}) {
+  const [placeholder, setPlaceholder] = useState('Enter topic');
+  const [query, setQuery] = useState('');
+  const [isClicked, setIsClicked] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
 
   function handleSearchChange(evt) {
     setQuery(evt.target.value);
   }
 
-  function handleSearchSubmit(evt){
-    evt.preventDefault()
-    if (query===''){
-      return setPlaceholder('Please enter some keywords')
+  function handleSearchSubmit(evt) {
+    evt.preventDefault();
+    if (query === '') {
+      return setPlaceholder('Please enter some keywords');
     }
-    onSubmit(query)
+    onSubmit(query);
   }
-
 
   return (
     <form className="search" onSubmit={handleSearchSubmit}>
@@ -30,7 +29,14 @@ function Search({searchQuery, setSearchQuery, onSubmit}) {
         value={query}
         onChange={handleSearchChange}
       />
-      <button className="search__button" type="submit">
+      <button
+        className={`search__button ${isHovered?'search__button_hover':''} ${isClicked ? 'search__button_clicked' : ''}`}
+        type="submit"
+        onMouseDown={() => setIsClicked(true)}
+        onMouseUp={()=> setIsClicked(false)}
+        onMouseOver={()=>setIsHovered(true)}
+        onMouseOut={()=>setIsHovered(false)}
+      >
         Search
       </button>
     </form>
