@@ -1,16 +1,30 @@
-import React, {useState} from "react";
-import NewsCard from "../NewsCard/NewsCard";
-import './ResultCard.css'
+import React, {useState} from 'react';
+import NewsCard from '../NewsCard/NewsCard';
+import './ResultCard.css';
 
-function ResultCard(props){
+function ResultCard(props) {
+  const [isSaved, setIsSaved] = useState(false);
+  const [bookmarkHover, setBookmarkHover] = React.useState(false);
 
-  
-  const [isSaved, setIsSaved] = useState(false)
+  return (
+    <NewsCard props={props.card}>
+      <button
+        className={`save-button ${isSaved ? 'save-button_active' : ''}`}
+        onClick={() => {
+          setIsSaved(!isSaved);
+        }}
+        onMouseEnter={() => {
+          setBookmarkHover(true);
+        }}
+        onMouseLeave={() => {
+          setBookmarkHover(false);
+        }}
+      />
+      <button className={`tooltip ${bookmarkHover ? 'tooltip_visible' : ''}`}>
+        Sign in to save article
+      </button>
+    </NewsCard>
+  );
+}
 
-  return(
-  <NewsCard props={props.card}>
-      <button className={`save-button ${isSaved? 'save-button_active' :''}`} onClick={()=>{setIsSaved(!isSaved)}}/>
-</NewsCard>
-  )}
-
-export default ResultCard
+export default ResultCard;

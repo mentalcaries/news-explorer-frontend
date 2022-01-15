@@ -14,7 +14,8 @@ function ModalWithForm({
   password,
   children,
   userOption,
-  onSwitchModal
+  onSwitchModal,
+  button
 }) {
 
   const [emailErrorMessage, setEmailErrorMesage] = useState('');
@@ -72,9 +73,9 @@ function ModalWithForm({
             <span className={`modal__error`} id="password-error" >{passwordErrorMessage}</span>
               {children}
 
-            <button className={`modal__submit ${isFormValid? '' :'modal__submit_disabled'}`} disabled={isFormValid? false: true}>{userOption}</button>
+            <button className={`modal__submit ${isFormValid? '' :'modal__submit_disabled'}`} disabled={isFormValid? false: true}>{button}</button>
           </form>
-          <p className="modal__text">or <span onClick={onSwitchModal} className="modal__span">Sign Up</span></p>
+          <p className="modal__text">or <span onClick={onSwitchModal} className="modal__span">{userOption}</span></p>
         </div>
       </div>
     </div>

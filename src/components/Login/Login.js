@@ -11,7 +11,8 @@ function Login({
   email,
   setPassword,
   password,
-  onSwitchModal
+  onSwitchModal,
+  
 }) {
   return (
     <ModalWithForm
@@ -26,6 +27,7 @@ function Login({
       setPassword={setPassword}
       userOption="Sign Up"
       onSwitchModal={onSwitchModal}
+      button="Sign In"
     />
   );
 }

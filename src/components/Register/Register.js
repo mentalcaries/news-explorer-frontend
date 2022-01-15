@@ -31,8 +31,9 @@ function handleUsernameChange(evt){
       email={email}
       password={password}
       setPassword={setPassword}
-      userOption="Sign In"
+      userOption="Sign in"
       onSwitchModal={onSwitchModal}
+      button="Sign Up"
     >
       <p className="modal__label">Username</p>
       <input

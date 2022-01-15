@@ -2,7 +2,7 @@ import {useLocation} from 'react-router';
 import Navigation from '../Navigation/Navigation';
 import './Header.css';
 
-function Header({onLogin, loggedIn, isMenuOpen, setIsMenuOpen}) {
+function Header({onLogin, loggedIn, isMenuOpen, setIsMenuOpen, modalOpened}) {
   const {pathname} = useLocation();
   const lightHeader = pathname === '/articles';
 
@@ -11,7 +11,7 @@ function Header({onLogin, loggedIn, isMenuOpen, setIsMenuOpen}) {
   }
 
   return (
-    <header className="header">
+    <header className={`header ${modalOpened? 'header_hidden': ''}`}>
       <div
         className={`overlay ${isMenuOpen ? 'overlay_visible' : ''}`}
         onClick={toggleMenu}

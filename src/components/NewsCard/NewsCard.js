@@ -15,7 +15,7 @@ function NewsCard({props, children}) {
   return (
     <article className="newscard">
      {children}
-      <img src={props.urlToImage} alt="" className="newscard__image" />
+      <img src={props.urlToImage} alt={`Headline for ${props.title}`} className="newscard__image" />
       <div className="newscard__text">
         <p className="newscard__date">{date}</p>
         <a href={props.url} className="newscard__link" target="_blank" rel='noreferrer'>

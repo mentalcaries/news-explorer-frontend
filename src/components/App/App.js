@@ -14,29 +14,38 @@ import Register from '../Register/Register';
 import {api} from '../utils/NewsApi';
 import NoResult from '../NoResult/NoResult';
 import { useEffect } from 'react/cjs/react.production.min';
+import ModalAlert from '../ModalAlert/ModalAlert';
 
 function App() {
-  const [loggedIn, setLoggedIn] = useState(true);
+  const [loggedIn, setLoggedIn] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [username, setUsername] = useState('');
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const[isAlertOpen, setIsAlertOpen] = useState(true)
   const [articles, setArticles] = useState(
     JSON.parse(localStorage.getItem('searchResults'))
   );
   const [isLoading, setIsLoading] = useState(false);
   const [searchSubmitted, setSearchSubmitted] = useState(false);
+  // const [showHeader, setShowHeader] = useState(true);
+
+    const modalOpened = isLoginModalOpen || isRegisterModalOpen || isAlertOpen
+    console.log(modalOpened)
 
   function handleLoginSubmit(evt) {
     evt.preventDefault();
+    setLoggedIn(true)
     console.log({email, password});
+    setIsLoginModalOpen(false)
   }
 
   function handleRegisterSubmit(evt) {
     evt.preventDefault();
     console.log({email, password, username});
+    setIsAlertOpen(true)
   }
 
   //get search result from Search component
@@ -63,9 +72,15 @@ function App() {
     //Header menu may have to be closed here as well
   }
 
+  function handleAlert(){
+    setIsAlertOpen(true)
+  }
+
   function closeAllModals() {
     setIsRegisterModalOpen(false);
     setIsLoginModalOpen(false);
+    setIsAlertOpen(false)
+
   }
 
   function handleOutsideClick(evt) {
@@ -86,6 +101,7 @@ function App() {
         onLogin={handleLogin}
         isMenuOpen={isMenuOpen}
         setIsMenuOpen={setIsMenuOpen}
+        modalOpened={modalOpened}
       />
       <Route exact path="/">
         <Main onSubmit={handleSearchSubmit} />
@@ -125,6 +141,7 @@ function App() {
         onOutsideClick={handleOutsideClick}
         onSwitchModal={switchModal}
       />
+      <ModalAlert isOpen={isAlertOpen} onClose={closeAllModals}/>
       <Footer />
     </div>
   );

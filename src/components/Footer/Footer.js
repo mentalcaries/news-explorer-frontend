@@ -17,8 +17,8 @@ function Footer() {
                   <a href='https://practicum.yandex.com' className="footer__link" target="_blank" rel='noreferrer' >Practicum by Yandex</a>
               </div>                
               <div className="footer__social-icons">
-              	<a href="https://www.github.com/mentalcaries" className="footer__social-icon" target="_blank" rel='noreferrer' ><img src={gh_icon} alt="" /></a>
-                <a href="https://www.facebook.com" className="footer__social-icon" target="_blank" rel='noreferrer'><img src={fb_icon} alt="" /></a>
+              	<a href="https://www.github.com/mentalcaries" className="footer__social-icon" target="_blank" rel='noreferrer' ><img src={gh_icon} alt="GitHub Icon" /></a>
+                <a href="https://www.facebook.com" className="footer__social-icon" target="_blank" rel='noreferrer'><img src={fb_icon} alt="Facebook Icon" /></a>
                 </div>
               </nav>
       </div>

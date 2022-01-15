@@ -98,3 +98,10 @@
     background-image: url(../../images/close-black.svg);
   }
 }
+
+@media screen and (max-width: 520px) {
+  .header_hidden{
+visibility: hidden;
+  }
+  
+}
