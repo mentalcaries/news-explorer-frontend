@@ -67,6 +67,11 @@ function App() {
     setIsMenuOpen(false);
   }
 
+  function handleLogout(){
+    setLoggedIn(false);
+    setIsMenuOpen(false)
+  }
+
   function handleRegister() {
     setIsRegisterModalOpen(true);
     //Header menu may have to be closed here as well
@@ -112,6 +117,7 @@ function App() {
       <Header
         loggedIn={loggedIn}
         onLogin={handleLogin}
+        onLogout={handleLogout}
         isMenuOpen={isMenuOpen}
         setIsMenuOpen={setIsMenuOpen}
         modalOpened={modalOpened}
