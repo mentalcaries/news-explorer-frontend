@@ -16,7 +16,7 @@
 }
 
 .newscard__date {
-  font-family: 'Source Sans Pro';
+  font-family: 'Source Sans Pro', Arial, Helvetica, sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 18px;
@@ -37,7 +37,7 @@
 }
 
 .newscard__title {
-  font-family: 'Roboto Slab';
+  font-family: 'Roboto Slab', Arial, Helvetica, sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 26px;
@@ -51,7 +51,7 @@
 }
 
 .newscard__paragraph {
-  font-family: 'Roboto';
+  font-family: 'Roboto', Arial, Helvetica, sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 16px;
@@ -66,7 +66,7 @@
 }
 
 .newscard__source {
-  font-family: 'Roboto Slab';
+  font-family: 'Roboto Slab', Arial, Helvetica, sans-serif;
   font-style: normal;
   font-weight: bold;
   font-size: 16px;

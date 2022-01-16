@@ -21,7 +21,7 @@
 }
 
 .about__title {
-  font-family: 'Roboto Slab';
+  font-family: 'Roboto Slab',Arial, Helvetica, sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 40px;
@@ -31,7 +31,7 @@
 }
 
 .about__paragraph {
-  font-family: 'Roboto';
+  font-family: 'Roboto', Arial, Helvetica, sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 18px;

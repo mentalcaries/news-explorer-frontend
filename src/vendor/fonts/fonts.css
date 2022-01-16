@@ -3,8 +3,7 @@
   font-style: normal;
   font-weight: 400;
   src: local(''), url('./roboto-slab-v16-latin-regular.woff2') format('woff2'),
-    /* Chrome 26+, Opera 23+, Firefox 39+ */
-      url('./roboto-slab-v16-latin-regular.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+    url('./roboto-slab-v16-latin-regular.woff') format('woff');
 }
 
 /* roboto-slab-700 - latin */
@@ -13,8 +12,7 @@
   font-style: normal;
   font-weight: 700;
   src: local(''), url('./roboto-slab-v16-latin-700.woff2') format('woff2'),
-    /* Chrome 26+, Opera 23+, Firefox 39+ */
-      url('./roboto-slab-v16-latin-700.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+    url('./roboto-slab-v16-latin-700.woff') format('woff');
 }
 
 /* roboto-regular - latin */
@@ -23,8 +21,7 @@
   font-style: normal;
   font-weight: 400;
   src: local(''), url('./roboto-v29-latin-regular.woff2') format('woff2'),
-    /* Chrome 26+, Opera 23+, Firefox 39+ */
-      url('./roboto-v29-latin-regular.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+    url('./roboto-v29-latin-regular.woff') format('woff');
 }
 
 /* roboto-500 - latin */
@@ -33,8 +30,7 @@
   font-style: normal;
   font-weight: 500;
   src: local(''), url('./roboto-v29-latin-500.woff2') format('woff2'),
-    /* Chrome 26+, Opera 23+, Firefox 39+ */ url('./roboto-v29-latin-500.woff')
-      format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+    url('./roboto-v29-latin-500.woff') format('woff');
 }
 /* source-sans-pro-regular - latin */
 @font-face {
@@ -43,15 +39,13 @@
   font-weight: 400;
   src: local(''),
     url('./source-sans-pro-v18-latin-regular.woff2') format('woff2'),
-    /* Chrome 26+, Opera 23+, Firefox 39+ */
-      url('./source-sans-pro-v18-latin-regular.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+    url('./source-sans-pro-v18-latin-regular.woff') format('woff');
 }
 
 @font-face {
   font-family: 'Inter';
   font-style: normal;
   font-weight: 400;
-  src: local(''),
-       url('./inter-v7-latin-regular.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
-       url('./inter-v7-latin-regular.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+  src: local(''), url('./inter-v7-latin-regular.woff2') format('woff2'),
+    url('./inter-v7-latin-regular.woff') format('woff');
 }

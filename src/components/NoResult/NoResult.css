@@ -13,7 +13,7 @@
   width: 100%;
 }
 .no-result__ title {
-  font-family: 'Roboto Slab';
+  font-family: 'Roboto Slab', Arial, Helvetica, sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 26px;
@@ -23,7 +23,7 @@
 }
 
 .no-result__text {
-  font-family: 'Roboto';
+  font-family: 'Roboto', Arial, Helvetica, sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 18px;
