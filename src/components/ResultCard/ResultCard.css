@@ -1,0 +1,48 @@
+.save-button {
+  position: absolute;
+  margin: 0;
+  top: 24px;
+  right: 24px;
+  z-index: 3;
+  background: #ffffff;
+  height: 40px;
+  width: 40px;
+  border-radius: 8px;
+  border: none;
+  background-image: url('../../images/bookmark.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  filter: drop-shadow(2px 2px 2px rgba(0, 0, 0, 0.4));
+  transition: 0.3s linear;
+  cursor: pointer;
+}
+
+.save-button:hover {
+  background-image: url('../../images/bookmark_hover.svg');
+  /* fill: #1a1b22; */
+}
+
+.save-button_active {
+  background-image: url('../../images/bookmarked.svg');
+  transition:  0.2s linear
+}
+.save-button_active:hover {
+  opacity: 0.8;
+  background-image: url('../../images/bookmarked.svg');
+
+}
+
+@media screen and (max-width: 800px) {
+  .save-button{
+    top: 8px;
+    right: 8px;
+  }
+  
+}
+@media screen and (max-width: 615px) {
+  .save-button{
+    top: 16px;
+    right: 16px;
+  }
+  
+}

@@ -1,0 +1,132 @@
+.nav {
+  display: flex;
+}
+
+.nav__link {
+  font-family: 'Roboto', Arial, Helvetica, sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 24px;
+  color: #ffffff;
+  text-decoration: none;
+  align-self: center;
+  margin-right: 42px;
+  margin-top: 30px;
+  padding-bottom: 26px;
+  z-index: 5;
+}
+
+.nav__link_active {
+  border-bottom: 3px solid white;
+  padding-bottom: 23px;
+}
+
+.nav__button {
+  border: 1px solid #ffffff;
+  background-color: transparent;
+  box-sizing: border-box;
+  border-radius: 100px;
+  font-family: 'Roboto', Arial, Helvetica, sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #ffffff;
+  min-width: 176px;
+  height: 48px;
+  margin-top: 19px;
+  cursor: pointer;
+  z-index: 5;
+}
+
+.nav__button_user {
+  min-width: 122px;
+  padding: 0 19px;
+  justify-content: space-between;
+}
+
+.nav_light {
+  color: #1a1b22;
+}
+
+.nav__button_light {
+  color: #1a1b22;
+  border: 1px solid #1a1b22;
+}
+
+.nav__link_active_light {
+  color: #1a1b22;
+  border-bottom: 3px solid #1a1b22;
+}
+
+@media screen and (max-width: 850px) {
+  .nav__link {
+    font-size: 16px;
+    line-height: 24px;
+    padding-bottom: 20px;
+  }
+
+  .nav__link_active {
+    padding-bottom: 17px;
+  }
+
+  .nav__button {
+    font-size: 16px;
+    line-height: 24px;
+    height: 40px;
+  }
+
+  .nav__button_user {
+    min-width: 100px;
+    padding: 0 15px;
+  }
+}
+@media screen and (max-width: 620px) {
+  .nav {
+    flex-direction: column;
+    gap: 22px;
+    max-width: 288px;
+    padding-bottom: 0;
+    overflow: hidden;
+    transition: all 0.3s linear;
+    max-height: 0;
+    transform-origin: top;
+    transform: scaleY(0);
+  }
+
+  .nav_open {
+    transform: scaleY(1);
+    padding-bottom: 24px;
+    overflow: visible;
+    max-height: fit-content;
+    position: relative;
+    z-index: 5;
+  }
+
+  .nav__link {
+    font-size: 18px;
+    line-height: 56px;
+    margin: 0;
+    padding: 0;
+    align-self: flex-start;
+  }
+
+  .nav__button {
+    font-size: 18px;
+    line-height: 24px;
+    height: 56px;
+    margin: 0;
+  }
+
+  .nav__button_user {
+    max-width: fit-content;
+    padding: 0 19px;
+  }
+  .nav__logout {
+    padding-left: 15px;
+  }
+}
