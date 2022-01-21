@@ -10,7 +10,7 @@
 
 .no-result__sad {
   max-height: 96px;
-  width: 100%;
+  max-width: 96px;
 }
 .no-result__ title {
   font-family: 'Roboto Slab', Arial, Helvetica, sans-serif;
