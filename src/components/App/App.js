@@ -11,10 +11,10 @@ import {Route} from 'react-router';
 import Preloader from '../Preloader/Preloader';
 import Login from '../Login/Login';
 import Register from '../Register/Register';
-import {api} from '../utils/NewsApi';
+import {api} from '../../utils/NewsApi';
 import NoResult from '../NoResult/NoResult';
-import {useEffect} from 'react/cjs/react.production.min';
 import ModalAlert from '../ModalAlert/ModalAlert';
+import { register, authorise,  verifyUser } from '../../utils/auth';
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -31,6 +31,7 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [searchSubmitted, setSearchSubmitted] = useState(false);
   // const [showHeader, setShowHeader] = useState(true);
+  const [isRegistered, setIsRegistered] = useState(false)
 
   const modalOpened = isLoginModalOpen || isRegisterModalOpen || isAlertOpen;
 
@@ -43,8 +44,17 @@ function App() {
 
   function handleRegisterSubmit(evt) {
     evt.preventDefault();
-    console.log({email, password, username});
-    setIsAlertOpen(true);
+    console.log({email, password, name: username});
+    register(email, password, username)
+    .then((res)=>{
+      if (res){
+        setIsRegistered(true)
+        setIsAlertOpen(true);
+      }
+    })
+    .catch(()=>{
+      // display the error above the button
+    })
   }
 
   //get search result from Search component
@@ -67,9 +77,9 @@ function App() {
     setIsMenuOpen(false);
   }
 
-  function handleLogout(){
+  function handleLogout() {
     setLoggedIn(false);
-    setIsMenuOpen(false)
+    setIsMenuOpen(false);
   }
 
   function handleRegister() {
@@ -128,7 +138,7 @@ function App() {
 
         {articles !== null &&
           (articles.length > 0 ? (
-            <SearchResults articles={articles} handleLogin={handleLogin}/>
+            <SearchResults articles={articles} handleLogin={handleLogin} />
           ) : (
             searchSubmitted && <NoResult />
           ))}

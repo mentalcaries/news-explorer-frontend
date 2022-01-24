@@ -1,5 +1,5 @@
 import React from 'react';
-import { useState } from 'react/cjs/react.development';
+import { useState, useRef, useEffect } from 'react/cjs/react.development';
 import './ModalWithForm.css';
 
 function ModalWithForm({
@@ -20,11 +20,17 @@ function ModalWithForm({
 
   const [emailErrorMessage, setEmailErrorMesage] = useState('');
   const [passwordErrorMessage, setPasswordErrorMesage] = useState('');
-  const [isFormValid, setIsFormValid] = useState(false)
+  const [isFormValid, setIsFormValid] = useState(false);
+  const formRef = React.createRef();
+
+  useEffect(()=>{
+    setIsFormValid(formRef.current.checkValidity())
+  },[formRef])
 
   function handleEmailChange(evt){
     setEmail(evt.target.value)
     setEmailErrorMesage(evt.target.validationMessage)
+    console.log(evt.target.validity.valid)
   }
 
   function handlePasswordChange(evt) {
@@ -32,11 +38,6 @@ function ModalWithForm({
     setPasswordErrorMesage(evt.target.validationMessage)
   }
 
-  function handleFormValidation(evt){
-    setIsFormValid(evt.target.validity.valid)
-    //Validation should be set for both fields depending on requirements
-    //To recheck with back end
-  }
 
   return (
     <div className={`modal ${isOpen? 'modal_opened': ''}`} >
@@ -45,7 +46,7 @@ function ModalWithForm({
           <button onClick={onClose} className="modal__close-btn"></button>
           <h2 className="modal__title">{title}</h2>
 
-          <form action="" className="modal__form"  noValidate onSubmit={onSubmit} onChange={handleFormValidation} >
+          <form action="" className="modal__form"  noValidate onSubmit={onSubmit} ref={formRef} >
             <p className="modal__label" type="email" name="email">
               Email
             </p>

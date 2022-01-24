@@ -1,4 +1,5 @@
 import React from 'react';
+import { useState } from 'react/cjs/react.development';
 import ModalWithForm from '../ModalWithForm/ModalWithForm';
 import './Register.css';
 
@@ -16,8 +17,11 @@ function Register({
   onSwitchModal
 }) {
 
+  const [isNameValid, setIsNameValid] = useState(false)
+
 function handleUsernameChange(evt){
   setUsername(evt.target.value)
+  setIsNameValid(evt.target.validity.valid)
 }
 
   return (
@@ -33,6 +37,7 @@ function handleUsernameChange(evt){
       setPassword={setPassword}
       userOption="Sign in"
       onSwitchModal={onSwitchModal}
+      isNameValid={isNameValid}
       button="Sign Up"
     >
       <p className="modal__label">Username</p>
