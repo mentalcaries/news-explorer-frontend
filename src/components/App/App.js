@@ -15,7 +15,7 @@ import {api} from '../../utils/NewsApi';
 import NoResult from '../NoResult/NoResult';
 import ModalAlert from '../ModalAlert/ModalAlert';
 import {register, authorise, verifyUser} from '../../utils/auth';
-import {getCurrentUser, getSavedArticles} from '../../utils/MainApi';
+import {createArticle, getCurrentUser, getSavedArticles} from '../../utils/MainApi';
 import {useEffect} from 'react/cjs/react.development';
 import {CurrentUserContext} from '../../contexts/UserContext';
 
@@ -74,7 +74,21 @@ function App() {
       });
   }, [loggedIn]);
 
-  console.log(savedArticles);
+  function saveArticle(article){
+    createArticle({
+      _id: article._id,
+      keyword: article.keyword,
+      title: article.title,
+      content: article.text,
+      date: article.date,
+      source: {name: article.source},
+      url: article.link,
+      urlToImage: article.image,
+      owner: article.owner,
+    })
+    .then()
+  }
+
   const modalOpened = isLoginModalOpen || isRegisterModalOpen || isAlertOpen;
 
   function resetForm() {
