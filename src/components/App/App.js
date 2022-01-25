@@ -15,9 +15,12 @@ import {api} from '../../utils/NewsApi';
 import NoResult from '../NoResult/NoResult';
 import ModalAlert from '../ModalAlert/ModalAlert';
 import {register, authorise, verifyUser} from '../../utils/auth';
+import { getCurrentUser } from '../../utils/MainApi';
 import { useEffect } from 'react/cjs/react.development';
+import { CurrentUserContext } from '../../contexts/UserContext';
 
 function App() {
+  const [currentUser, setCurrentUser] = useState({})
   const [loggedIn, setLoggedIn] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -39,6 +42,12 @@ function App() {
     checkToken();
   }, [])
 
+  useEffect(()=>{
+    loggedIn && getCurrentUser()
+    .then((res) => setCurrentUser(res))
+    .catch((err) => console.log(err))
+  }, [loggedIn]);
+
   const modalOpened = isLoginModalOpen || isRegisterModalOpen || isAlertOpen;
 
   function resetForm() {
@@ -54,6 +63,7 @@ function App() {
           setIsLoginModalOpen(false);
           setSubmitError('');
           resetForm();
+
         }
       })
       .catch((err) => {
@@ -82,7 +92,7 @@ function App() {
       });
   }
 
-
+  
 
   function checkToken(){
     if (localStorage.getItem('jwt')){
@@ -122,6 +132,7 @@ function App() {
     setLoggedIn(false);
     setIsMenuOpen(false);
     localStorage.removeItem('jwt')
+    setCurrentUser({})
   }
 
   function handleRegister() {
@@ -166,6 +177,7 @@ function App() {
 
   return (
     <div className="app">
+      <CurrentUserContext.Provider value={currentUser}>
       <Header
         loggedIn={loggedIn}
         onLogin={handleLogin}
@@ -173,6 +185,7 @@ function App() {
         isMenuOpen={isMenuOpen}
         setIsMenuOpen={setIsMenuOpen}
         modalOpened={modalOpened}
+        currentUser={currentUser}
       />
       <Route exact path="/">
         <Main onSubmit={handleSearchSubmit} />
@@ -222,6 +235,7 @@ function App() {
         onLoginClick={handleLogin}
       />
       <Footer />
+      </CurrentUserContext.Provider>
     </div>
   );
 }

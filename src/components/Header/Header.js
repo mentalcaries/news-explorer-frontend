@@ -2,7 +2,7 @@ import {useLocation} from 'react-router';
 import Navigation from '../Navigation/Navigation';
 import './Header.css';
 
-function Header({onLogin, loggedIn, onLogout, isMenuOpen, setIsMenuOpen, modalOpened}) {
+function Header({onLogin, loggedIn, onLogout, isMenuOpen, setIsMenuOpen, modalOpened, currentUser}) {
   const {pathname} = useLocation();
   const lightHeader = pathname === '/articles';
 
@@ -32,13 +32,13 @@ function Header({onLogin, loggedIn, onLogout, isMenuOpen, setIsMenuOpen, modalOp
           } ${isMenuOpen && lightHeader ? 'header__menu_open_light' : ''}`}
           onClick={toggleMenu}
         />
-        <Navigation
-          
+        <Navigation          
           onLogin={onLogin}
           loggedIn={loggedIn}
           isMenuOpen={isMenuOpen}
           lightHeader={lightHeader}
           onLogout={onLogout}
+          currentUser={currentUser}
         />
       </div>
     </header>
