@@ -15,7 +15,7 @@ import {api} from '../../utils/NewsApi';
 import NoResult from '../NoResult/NoResult';
 import ModalAlert from '../ModalAlert/ModalAlert';
 import {register, authorise, verifyUser} from '../../utils/auth';
-import { getCurrentUser } from '../../utils/MainApi';
+import { getCurrentUser, getSavedArticles } from '../../utils/MainApi';
 import { useEffect } from 'react/cjs/react.development';
 import { CurrentUserContext } from '../../contexts/UserContext';
 
@@ -37,16 +37,24 @@ function App() {
   // const [showHeader, setShowHeader] = useState(true);
   const [isRegistered, setIsRegistered] = useState(false);
   const [submitError, setSubmitError] = useState('');
+  const [savedArticles, setSavedArticles] = useState([])
 
   useEffect(()=>{
     checkToken();
   }, [])
+
+  //Main API calls
 
   useEffect(()=>{
     loggedIn && getCurrentUser()
     .then((res) => setCurrentUser(res))
     .catch((err) => console.log(err))
   }, [loggedIn]);
+
+  useEffect(()=>{
+    loggedIn && setSavedArticles(getSavedArticles())
+  }, [loggedIn])
+
 
   const modalOpened = isLoginModalOpen || isRegisterModalOpen || isAlertOpen;
 
@@ -60,6 +68,7 @@ function App() {
     authorise(email, password)
       .then((res) => {
         if (res) {
+          setLoggedIn(true)
           setIsLoginModalOpen(false);
           setSubmitError('');
           resetForm();

@@ -21,6 +21,20 @@ export function getCurrentUser(){
   })
   .then(checkRes)
 }
+
 // Get articles
+
+export function getSavedArticles(){
+  return fetch(`${BASE_URL}/cards`, {
+    method: 'GET',
+    headers:{
+      Authorization: `Bearer ${localStorage.getItem('jwt')}`,
+      'Content-Type': 'application/json'
+    }
+  })
+  .then(checkRes)
+}
+
+
 // Create article
 // Delete article
