@@ -15,7 +15,8 @@ function ModalWithForm({
   children,
   userOption,
   onSwitchModal,
-  button
+  button,
+  submitError
 }) {
 
   const [emailErrorMessage, setEmailErrorMesage] = useState('');
@@ -30,12 +31,17 @@ function ModalWithForm({
   function handleEmailChange(evt){
     setEmail(evt.target.value)
     setEmailErrorMesage(evt.target.validationMessage)
-    console.log(evt.target.validity.valid)
   }
 
   function handlePasswordChange(evt) {
     setPassword(evt.target.value);
     setPasswordErrorMesage(evt.target.validationMessage)
+  }
+
+  function handleFormSubmit(evt){
+    evt.preventDefault()
+    onSubmit()
+
   }
 
 
@@ -46,7 +52,7 @@ function ModalWithForm({
           <button onClick={onClose} className="modal__close-btn"></button>
           <h2 className="modal__title">{title}</h2>
 
-          <form action="" className="modal__form"  noValidate onSubmit={onSubmit} ref={formRef} >
+          <form action="" className="modal__form"  noValidate onSubmit={handleFormSubmit} ref={formRef} >
             <p className="modal__label" type="email" name="email">
               Email
             </p>
@@ -73,7 +79,7 @@ function ModalWithForm({
             />
             <span className={`modal__error`} id="password-error" >{passwordErrorMessage}</span>
               {children}
-
+              <span className={`modal__error modal__error_submit`} id="signup-error" >{submitError}</span>
             <button className={`modal__submit ${isFormValid? '' :'modal__submit_disabled'}`} disabled={isFormValid? false: true}>{button}</button>
           </form>
           <p className="modal__text">or <span onClick={onSwitchModal} className="modal__span">{userOption}</span></p>

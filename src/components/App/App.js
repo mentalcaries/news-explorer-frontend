@@ -14,7 +14,8 @@ import Register from '../Register/Register';
 import {api} from '../../utils/NewsApi';
 import NoResult from '../NoResult/NoResult';
 import ModalAlert from '../ModalAlert/ModalAlert';
-import { register, authorise,  verifyUser } from '../../utils/auth';
+import {register, authorise, verifyUser} from '../../utils/auth';
+import { useEffect } from 'react/cjs/react.development';
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -31,30 +32,70 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [searchSubmitted, setSearchSubmitted] = useState(false);
   // const [showHeader, setShowHeader] = useState(true);
-  const [isRegistered, setIsRegistered] = useState(false)
+  const [isRegistered, setIsRegistered] = useState(false);
+  const [submitError, setSubmitError] = useState('');
+
+  useEffect(()=>{
+    checkToken();
+  }, [])
 
   const modalOpened = isLoginModalOpen || isRegisterModalOpen || isAlertOpen;
 
-  function handleLoginSubmit(evt) {
-    evt.preventDefault();
-    setLoggedIn(true);
-    console.log({email, password});
-    setIsLoginModalOpen(false);
+  function resetForm() {
+    setEmail('');
+    setPassword('');
+    setUsername('');
   }
 
-  function handleRegisterSubmit(evt) {
-    evt.preventDefault();
-    console.log({email, password, name: username});
+  function handleLoginSubmit() {
+    authorise(email, password)
+      .then((res) => {
+        if (res) {
+          setIsLoginModalOpen(false);
+          setSubmitError('');
+          resetForm();
+        }
+      })
+      .catch((err) => {
+        if (err) {
+          setSubmitError('Incorrect username or password');
+        }
+      });
+  }
+
+  function handleRegisterSubmit() {
     register(email, password, username)
-    .then((res)=>{
-      if (res){
-        setIsRegistered(true)
-        setIsAlertOpen(true);
-      }
-    })
-    .catch(()=>{
-      // display the error above the button
-    })
+      .then((res) => {
+        if (res) {
+          setIsRegistered(true);
+          setIsAlertOpen(true);
+          setIsRegisterModalOpen(false);
+          resetForm();
+        }
+      })
+      .catch((err) => {
+        // display the error above the button
+        if (err === 'Error: 409') {
+          return setSubmitError('That email is not available');
+        }
+        return setSubmitError('');
+      });
+  }
+
+
+
+  function checkToken(){
+    if (localStorage.getItem('jwt')){
+      const jwt = localStorage.getItem('jwt');
+      verifyUser(jwt)
+      .then((res)=>{
+        if(!res){
+          return
+        }
+        setLoggedIn(true)
+      })
+
+    }
   }
 
   //get search result from Search component
@@ -80,6 +121,7 @@ function App() {
   function handleLogout() {
     setLoggedIn(false);
     setIsMenuOpen(false);
+    localStorage.removeItem('jwt')
   }
 
   function handleRegister() {
@@ -157,6 +199,7 @@ function App() {
         setPassword={setPassword}
         onOutsideClick={handleOutsideClick}
         onSwitchModal={switchModal}
+        submitError={submitError}
       />
       <Register
         isOpen={isRegisterModalOpen}
@@ -170,6 +213,7 @@ function App() {
         setUsername={setUsername}
         onOutsideClick={handleOutsideClick}
         onSwitchModal={switchModal}
+        submitError={submitError}
       />
       <ModalAlert
         isOpen={isAlertOpen}

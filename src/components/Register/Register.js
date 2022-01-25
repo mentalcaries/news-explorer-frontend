@@ -14,14 +14,16 @@ function Register({
   password,
   username,
   setUsername,
-  onSwitchModal
+  onSwitchModal,
+  submitError
 }) {
-
-  const [isNameValid, setIsNameValid] = useState(false)
+  const [usernameErrorMessage, setUsernameErrorMessage] = useState('')
+  // const [isNameValid, setIsNameValid] = useState(false)
 
 function handleUsernameChange(evt){
   setUsername(evt.target.value)
-  setIsNameValid(evt.target.validity.valid)
+  setUsernameErrorMessage(evt.target.validationMessage)
+  // setIsNameValid(evt.target.validity.valid)
 }
 
   return (
@@ -37,8 +39,8 @@ function handleUsernameChange(evt){
       setPassword={setPassword}
       userOption="Sign in"
       onSwitchModal={onSwitchModal}
-      isNameValid={isNameValid}
       button="Sign Up"
+      submitError={submitError}
     >
       <p className="modal__label">Username</p>
       <input
@@ -50,9 +52,10 @@ function handleUsernameChange(evt){
         onChange={handleUsernameChange}
         value={username}
       />
-      <span className={`modal__error`} id="password-error">
-        This field is required
+      <span className={`modal__error`} id="username-error">
+        {usernameErrorMessage}
       </span>
+      
     </ModalWithForm>
   );
 }
