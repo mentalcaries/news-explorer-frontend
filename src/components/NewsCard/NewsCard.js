@@ -3,7 +3,6 @@ import './NewsCard.css';
 
 function NewsCard({props, children}) {
 
-  // console.log(props.title)
   const date = new Date(props.publishedAt).toLocaleDateString(
     'en-us',
     {
@@ -20,7 +19,7 @@ function NewsCard({props, children}) {
         <p className="newscard__date">{date}</p>
         <a href={props.url} className="newscard__link" target="_blank" rel='noreferrer'>
         <h3 className="newscard__title">{props.title}</h3>
-        <p className="newscard__paragraph">{props.description}
+        <p className="newscard__paragraph">{props.content}
         </p>
         </a>
         <p className="newscard__source">{props.source.name}</p>

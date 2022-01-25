@@ -4,8 +4,7 @@ import SavedNewsHeader from '../SavedNewsHeader/SavedNewsHeader';
 import './SavedNews.css';
 import sample from './sample.json'
 
-function SavedNews() {
-
+function SavedNews({savedArticles}) {
 
   const card = JSON.parse(JSON.stringify(sample));
 
@@ -15,11 +14,10 @@ function SavedNews() {
       <SavedNewsHeader />
 
       <div className="saved__articles">
-        <SavedCard card={card} />
-        <SavedCard card={card} />
-        <SavedCard card={card} />
-        <SavedCard card={card} />
-        <SavedCard card={card} />
+        {savedArticles.map((article)=>{
+         return  <SavedCard card={article} id={article._id} />
+        })}
+
 
       </div>
       {/* Add saved cards here */}

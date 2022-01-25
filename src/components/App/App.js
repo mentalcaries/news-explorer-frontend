@@ -15,12 +15,12 @@ import {api} from '../../utils/NewsApi';
 import NoResult from '../NoResult/NoResult';
 import ModalAlert from '../ModalAlert/ModalAlert';
 import {register, authorise, verifyUser} from '../../utils/auth';
-import { getCurrentUser, getSavedArticles } from '../../utils/MainApi';
-import { useEffect } from 'react/cjs/react.development';
-import { CurrentUserContext } from '../../contexts/UserContext';
+import {getCurrentUser, getSavedArticles} from '../../utils/MainApi';
+import {useEffect} from 'react/cjs/react.development';
+import {CurrentUserContext} from '../../contexts/UserContext';
 
 function App() {
-  const [currentUser, setCurrentUser] = useState({})
+  const [currentUser, setCurrentUser] = useState({});
   const [loggedIn, setLoggedIn] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -37,25 +37,44 @@ function App() {
   // const [showHeader, setShowHeader] = useState(true);
   const [isRegistered, setIsRegistered] = useState(false);
   const [submitError, setSubmitError] = useState('');
-  const [savedArticles, setSavedArticles] = useState([])
+  const [savedArticles, setSavedArticles] = useState([]);
 
-  useEffect(()=>{
+  useEffect(() => {
     checkToken();
-  }, [])
+  }, []);
 
   //Main API calls
 
-  useEffect(()=>{
-    loggedIn && getCurrentUser()
-    .then((res) => setCurrentUser(res))
-    .catch((err) => console.log(err))
+  useEffect(() => {
+    loggedIn &&
+      getCurrentUser()
+        .then((res) => setCurrentUser(res))
+        .catch((err) => console.log(err));
   }, [loggedIn]);
 
-  useEffect(()=>{
-    loggedIn && setSavedArticles(getSavedArticles())
-  }, [loggedIn])
+  useEffect(() => {
+    loggedIn &&
+      getSavedArticles().then((articleArray) => {
+        // setSavedArticles(articleArray)
+        setSavedArticles(
+          articleArray.map((article) => {
+            return {
+              _id: article._id,
+              keyword: article.keyword,
+              title: article.title,
+              content: article.text,
+              date: article.date,
+              source: {name: article.source},
+              url: article.link,
+              urlToImage: article.image,
+              owner: article.owner,
+            };
+          })
+        );
+      });
+  }, [loggedIn]);
 
-
+  console.log(savedArticles);
   const modalOpened = isLoginModalOpen || isRegisterModalOpen || isAlertOpen;
 
   function resetForm() {
@@ -68,11 +87,10 @@ function App() {
     authorise(email, password)
       .then((res) => {
         if (res) {
-          setLoggedIn(true)
+          setLoggedIn(true);
           setIsLoginModalOpen(false);
           setSubmitError('');
           resetForm();
-
         }
       })
       .catch((err) => {
@@ -101,19 +119,15 @@ function App() {
       });
   }
 
-  
-
-  function checkToken(){
-    if (localStorage.getItem('jwt')){
+  function checkToken() {
+    if (localStorage.getItem('jwt')) {
       const jwt = localStorage.getItem('jwt');
-      verifyUser(jwt)
-      .then((res)=>{
-        if(!res){
-          return
+      verifyUser(jwt).then((res) => {
+        if (!res) {
+          return;
         }
-        setLoggedIn(true)
-      })
-
+        setLoggedIn(true);
+      });
     }
   }
 
@@ -140,8 +154,8 @@ function App() {
   function handleLogout() {
     setLoggedIn(false);
     setIsMenuOpen(false);
-    localStorage.removeItem('jwt')
-    setCurrentUser({})
+    localStorage.removeItem('jwt');
+    setCurrentUser({});
   }
 
   function handleRegister() {
@@ -187,63 +201,63 @@ function App() {
   return (
     <div className="app">
       <CurrentUserContext.Provider value={currentUser}>
-      <Header
-        loggedIn={loggedIn}
-        onLogin={handleLogin}
-        onLogout={handleLogout}
-        isMenuOpen={isMenuOpen}
-        setIsMenuOpen={setIsMenuOpen}
-        modalOpened={modalOpened}
-        currentUser={currentUser}
-      />
-      <Route exact path="/">
-        <Main onSubmit={handleSearchSubmit} />
-        {isLoading && <Preloader />}
+        <Header
+          loggedIn={loggedIn}
+          onLogin={handleLogin}
+          onLogout={handleLogout}
+          isMenuOpen={isMenuOpen}
+          setIsMenuOpen={setIsMenuOpen}
+          modalOpened={modalOpened}
+          currentUser={currentUser}
+        />
+        <Route exact path="/">
+          <Main onSubmit={handleSearchSubmit} />
+          {isLoading && <Preloader />}
 
-        {articles !== null &&
-          (articles.length > 0 ? (
-            <SearchResults articles={articles} handleLogin={handleLogin} />
-          ) : (
-            searchSubmitted && <NoResult />
-          ))}
-        <About />
-      </Route>
-      <ProtectedRoute path="/articles" loggedIn={loggedIn}>
-        <SavedNews />
-      </ProtectedRoute>
-      <Login
-        isOpen={isLoginModalOpen}
-        onClose={closeAllModals}
-        onSubmit={handleLoginSubmit}
-        setEmail={setEmail}
-        email={email}
-        password={password}
-        setPassword={setPassword}
-        onOutsideClick={handleOutsideClick}
-        onSwitchModal={switchModal}
-        submitError={submitError}
-      />
-      <Register
-        isOpen={isRegisterModalOpen}
-        onClose={closeAllModals}
-        onSubmit={handleRegisterSubmit}
-        setEmail={setEmail}
-        email={email}
-        password={password}
-        setPassword={setPassword}
-        username={username}
-        setUsername={setUsername}
-        onOutsideClick={handleOutsideClick}
-        onSwitchModal={switchModal}
-        submitError={submitError}
-      />
-      <ModalAlert
-        isOpen={isAlertOpen}
-        onClose={closeAllModals}
-        onOutsideClick={handleOutsideClick}
-        onLoginClick={handleLogin}
-      />
-      <Footer />
+          {articles !== null &&
+            (articles.length > 0 ? (
+              <SearchResults articles={articles} handleLogin={handleLogin} />
+            ) : (
+              searchSubmitted && <NoResult />
+            ))}
+          <About />
+        </Route>
+        <ProtectedRoute path="/articles" loggedIn={loggedIn}>
+          <SavedNews savedArticles={savedArticles} />
+        </ProtectedRoute>
+        <Login
+          isOpen={isLoginModalOpen}
+          onClose={closeAllModals}
+          onSubmit={handleLoginSubmit}
+          setEmail={setEmail}
+          email={email}
+          password={password}
+          setPassword={setPassword}
+          onOutsideClick={handleOutsideClick}
+          onSwitchModal={switchModal}
+          submitError={submitError}
+        />
+        <Register
+          isOpen={isRegisterModalOpen}
+          onClose={closeAllModals}
+          onSubmit={handleRegisterSubmit}
+          setEmail={setEmail}
+          email={email}
+          password={password}
+          setPassword={setPassword}
+          username={username}
+          setUsername={setUsername}
+          onOutsideClick={handleOutsideClick}
+          onSwitchModal={switchModal}
+          submitError={submitError}
+        />
+        <ModalAlert
+          isOpen={isAlertOpen}
+          onClose={closeAllModals}
+          onOutsideClick={handleOutsideClick}
+          onLoginClick={handleLogin}
+        />
+        <Footer />
       </CurrentUserContext.Provider>
     </div>
   );
