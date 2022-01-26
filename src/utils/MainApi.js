@@ -52,3 +52,14 @@ export function createArticle(article){
 
 
 // Delete article
+
+export function deleteArticle(articleId){
+  return fetch(`${BASE_URL}/articles/${articleId}`,{
+    method: 'DELETE',
+    headers:{
+      Authorization: `Bearer ${localStorage.getItem('jwt')}`,
+      'Content-Type': 'application/json'
+    }
+  })
+  .then((res) => checkRes(res))
+}

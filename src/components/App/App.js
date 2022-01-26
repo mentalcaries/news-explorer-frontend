@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useCallback, useState} from 'react';
 import './App.css';
 import Main from '../Main/Main';
 import About from '../About/About';
@@ -15,7 +15,12 @@ import {api} from '../../utils/NewsApi';
 import NoResult from '../NoResult/NoResult';
 import ModalAlert from '../ModalAlert/ModalAlert';
 import {register, authorise, verifyUser} from '../../utils/auth';
-import {createArticle, getCurrentUser, getSavedArticles} from '../../utils/MainApi';
+import {
+  createArticle,
+  deleteArticle,
+  getCurrentUser,
+  getSavedArticles,
+} from '../../utils/MainApi';
 import {useEffect} from 'react/cjs/react.development';
 import {CurrentUserContext} from '../../contexts/UserContext';
 
@@ -36,7 +41,7 @@ function App() {
   const [searchSubmitted, setSearchSubmitted] = useState(false);
   // const [showHeader, setShowHeader] = useState(true);
   const [isRegistered, setIsRegistered] = useState(false);
-  const [keyword, setKeyword] = useState('')
+  const [keyword, setKeyword] = useState('');
   const [submitError, setSubmitError] = useState('');
   const [savedArticles, setSavedArticles] = useState([]);
 
@@ -53,30 +58,32 @@ function App() {
         .catch((err) => console.log(err));
   }, [loggedIn]);
 
-  useEffect(() => {
+  const getArticles = useCallback(() => {
     loggedIn &&
-      getSavedArticles().then((articleArray) => {
-        // setSavedArticles(articleArray)
-        setSavedArticles(
-          articleArray.map((article) => {
-            return {
-              _id: article._id,
-              keyword: article.keyword,
-              title: article.title,
-              content: article.text,
-              date: article.date,
-              source: {name: article.source},
-              url: article.link,
-              urlToImage: article.image,
-              owner: article.owner,
-            };
-          })
-        );
-      });
+    getSavedArticles().then((articleArray) => {
+      setSavedArticles(
+        articleArray.map((article) => {
+          return {
+            _id: article._id,
+            keyword: article.keyword,
+            title: article.title,
+            content: article.text,
+            date: article.date,
+            source: {name: article.source},
+            url: article.link,
+            urlToImage: article.image,
+            owner: article.owner,
+          };
+        })
+      );
+    });
   }, [loggedIn]);
 
-  
-  function saveArticle(article){
+  useEffect(() => {
+    getArticles();
+  }, [getArticles]);
+
+  function saveArticle(article) {
     createArticle({
       keyword,
       title: article.title,
@@ -86,9 +93,16 @@ function App() {
       link: article.url,
       image: article.urlToImage,
       owner: currentUser._id,
+    }).then(() => {
+      getArticles();
     })
-    .then((newCard) =>{
-    })
+    .catch((err) => console.log(err, 'Could not save card'));
+  }
+
+  function handleDeleteArticle(cardId){
+    deleteArticle(cardId)
+    .then(() => getArticles())
+    .catch((err)=> console.log(err, 'Could not delete card'))
   }
 
   const modalOpened = isLoginModalOpen || isRegisterModalOpen || isAlertOpen;
@@ -157,7 +171,7 @@ function App() {
         localStorage.setItem('searchResults', JSON.stringify(data.articles));
         setIsLoading(false);
         setSearchSubmitted(true);
-        setKeyword(query)
+        setKeyword(query);
       })
       .catch((err) => console.log(`Something went wrong: ${err}`));
   }
@@ -233,14 +247,19 @@ function App() {
 
           {articles !== null &&
             (articles.length > 0 ? (
-              <SearchResults articles={articles} handleLogin={handleLogin} loggedIn={loggedIn} onSave={saveArticle}/>
+              <SearchResults
+                articles={articles}
+                handleLogin={handleLogin}
+                loggedIn={loggedIn}
+                onSave={saveArticle}
+              />
             ) : (
               searchSubmitted && <NoResult />
             ))}
           <About />
         </Route>
         <ProtectedRoute path="/articles" loggedIn={loggedIn}>
-          <SavedNews savedArticles={savedArticles} />
+          <SavedNews savedArticles={savedArticles} onDelete={handleDeleteArticle} />
         </ProtectedRoute>
         <Login
           isOpen={isLoginModalOpen}
