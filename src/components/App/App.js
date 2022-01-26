@@ -36,6 +36,7 @@ function App() {
   const [searchSubmitted, setSearchSubmitted] = useState(false);
   // const [showHeader, setShowHeader] = useState(true);
   const [isRegistered, setIsRegistered] = useState(false);
+  const [keyword, setKeyword] = useState('')
   const [submitError, setSubmitError] = useState('');
   const [savedArticles, setSavedArticles] = useState([]);
 
@@ -74,19 +75,20 @@ function App() {
       });
   }, [loggedIn]);
 
+  
   function saveArticle(article){
     createArticle({
-      _id: article._id,
-      keyword: article.keyword,
+      keyword,
       title: article.title,
-      content: article.text,
-      date: article.date,
-      source: {name: article.source},
-      url: article.link,
-      urlToImage: article.image,
-      owner: article.owner,
+      text: article.content,
+      date: article.publishedAt,
+      source: article.source.name,
+      link: article.url,
+      image: article.urlToImage,
+      owner: currentUser._id,
     })
-    .then()
+    .then((newCard) =>{
+    })
   }
 
   const modalOpened = isLoginModalOpen || isRegisterModalOpen || isAlertOpen;
@@ -155,6 +157,7 @@ function App() {
         localStorage.setItem('searchResults', JSON.stringify(data.articles));
         setIsLoading(false);
         setSearchSubmitted(true);
+        setKeyword(query)
       })
       .catch((err) => console.log(`Something went wrong: ${err}`));
   }
@@ -230,7 +233,7 @@ function App() {
 
           {articles !== null &&
             (articles.length > 0 ? (
-              <SearchResults articles={articles} handleLogin={handleLogin} />
+              <SearchResults articles={articles} handleLogin={handleLogin} loggedIn={loggedIn} onSave={saveArticle}/>
             ) : (
               searchSubmitted && <NoResult />
             ))}

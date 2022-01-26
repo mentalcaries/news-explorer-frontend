@@ -4,10 +4,9 @@ import './SavedCard.css';
 
 const SavedCard = ({card}) => {
   const [deleteHover, setDeleteHover] = React.useState(false);
-  console.log(card)
   return (
     <NewsCard props={card}>
-      <p className="keyword-label">Nature</p>
+      <p className="keyword-label">{card.keyword}</p>
       <button
         onMouseEnter={() => {
           setDeleteHover(true);
