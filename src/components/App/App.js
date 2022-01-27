@@ -41,7 +41,7 @@ function App() {
   const [searchSubmitted, setSearchSubmitted] = useState(false);
   // const [showHeader, setShowHeader] = useState(true);
   const [isRegistered, setIsRegistered] = useState(false);
-  const [keyword, setKeyword] = useState('');
+  const [keyword, setKeyword] = useState(localStorage.getItem('keyword'));
   const [submitError, setSubmitError] = useState('');
   const [savedArticles, setSavedArticles] = useState([]);
 
@@ -60,23 +60,25 @@ function App() {
 
   const getArticles = useCallback(() => {
     loggedIn &&
-    getSavedArticles().then((articleArray) => {
-      setSavedArticles(
-        articleArray.map((article) => {
-          return {
-            _id: article._id,
-            keyword: article.keyword,
-            title: article.title,
-            content: article.text,
-            date: article.date,
-            source: {name: article.source},
-            url: article.link,
-            urlToImage: article.image,
-            owner: article.owner,
-          };
+      getSavedArticles()
+        .then((articleArray) => {
+          setSavedArticles(
+            articleArray.map((article) => {
+              return {
+                _id: article._id,
+                keyword: article.keyword,
+                title: article.title,
+                content: article.text,
+                date: article.date,
+                source: {name: article.source},
+                url: article.link,
+                urlToImage: article.image,
+                owner: article.owner,
+              };
+            })
+          );
         })
-      );
-    });
+        .catch(()=> setSavedArticles([]));
   }, [loggedIn]);
 
   useEffect(() => {
@@ -93,17 +95,24 @@ function App() {
       link: article.url,
       image: article.urlToImage,
       owner: currentUser._id,
-    }).then(() => {
-      getArticles();
     })
-    .catch((err) => console.log(err, 'Could not save card'));
+      .then(() => {
+        getArticles();
+      })
+      .catch((err) => console.log(err, 'Could not save card'));
   }
 
-  function handleDeleteArticle(cardId){
+  function handleDeleteArticle(cardId) {
     deleteArticle(cardId)
-    .then(() => getArticles())
-    .catch((err)=> console.log(err, 'Could not delete card'))
+      .then(() => {
+        setSavedArticles((articles) =>
+          articles.filter((article) => article._id !== cardId)
+        );
+      })
+      .catch((err) => console.log(err, 'Could not delete card'));
   }
+
+  ////
 
   const modalOpened = isLoginModalOpen || isRegisterModalOpen || isAlertOpen;
 
@@ -141,7 +150,6 @@ function App() {
         }
       })
       .catch((err) => {
-        // display the error above the button
         if (err === 'Error: 409') {
           return setSubmitError('That email is not available');
         }
@@ -172,6 +180,7 @@ function App() {
         setIsLoading(false);
         setSearchSubmitted(true);
         setKeyword(query);
+        localStorage.setItem('keyword', query);
       })
       .catch((err) => console.log(`Something went wrong: ${err}`));
   }
@@ -252,6 +261,7 @@ function App() {
                 handleLogin={handleLogin}
                 loggedIn={loggedIn}
                 onSave={saveArticle}
+                keyword={keyword}
               />
             ) : (
               searchSubmitted && <NoResult />
@@ -259,7 +269,10 @@ function App() {
           <About />
         </Route>
         <ProtectedRoute path="/articles" loggedIn={loggedIn}>
-          <SavedNews savedArticles={savedArticles} onDelete={handleDeleteArticle} />
+          <SavedNews
+            savedArticles={savedArticles}
+            onDelete={handleDeleteArticle}
+          />
         </ProtectedRoute>
         <Login
           isOpen={isLoginModalOpen}

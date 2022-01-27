@@ -33,7 +33,6 @@ export function getSavedArticles(){
     },
   })
   .then(checkRes)
-  
 }
 
 

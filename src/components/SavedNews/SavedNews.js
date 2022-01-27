@@ -6,12 +6,12 @@ import './SavedNews.css';
 function SavedNews({savedArticles, onDelete}) {
   return (
     <section className="saved">
-      <SavedNewsHeader />
+      <SavedNewsHeader savedArticles={savedArticles} />
 
       <div className="saved__articles">
         {savedArticles.map((article) => {
           return (
-            <SavedCard card={article} id={article._id} onDelete={onDelete} />
+            <SavedCard card={article} key={article._id} onDelete={onDelete} />
           );
         })}
       </div>

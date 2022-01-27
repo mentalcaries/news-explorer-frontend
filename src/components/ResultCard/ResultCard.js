@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import NewsCard from '../NewsCard/NewsCard';
 import './ResultCard.css';
 
-function ResultCard({card, loggedIn, handleLogin, onSave}) {
+function ResultCard({card, loggedIn, handleLogin, onSave,}) {
   const [isSaved, setIsSaved] = useState(false);
   const [bookmarkHover, setBookmarkHover] = React.useState(false);
 
@@ -12,7 +12,7 @@ function ResultCard({card, loggedIn, handleLogin, onSave}) {
   }
 
   return (
-    <NewsCard props={card}>
+    <NewsCard props={card} >
       {/* Adjust button to change to active ONLY if logged in and clicked */}
       <button
         className={`save-button ${isSaved ? 'save-button_active' : ''}`}
