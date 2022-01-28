@@ -2,13 +2,14 @@ import React, {useState} from 'react';
 import NewsCard from '../NewsCard/NewsCard';
 import './ResultCard.css';
 
-function ResultCard({card, loggedIn, handleLogin, onSave,}) {
-  const [isSaved, setIsSaved] = useState(false);
+function ResultCard({card, loggedIn, handleLogin, onSave, savedArticles}) {
+  
   const [bookmarkHover, setBookmarkHover] = React.useState(false);
+  // const [isSaved, setIsSaved] = useState(false);
+  const isSaved = savedArticles.some(savedArticle => savedArticle.url === card.url);
 
   function handleSave() {
     onSave(card)
-    setIsSaved(true)
   }
 
   return (

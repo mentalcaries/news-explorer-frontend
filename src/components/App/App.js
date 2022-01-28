@@ -26,7 +26,7 @@ import {CurrentUserContext} from '../../contexts/UserContext';
 
 function App() {
   const [currentUser, setCurrentUser] = useState({});
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(localStorage.getItem('auth'));
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [username, setUsername] = useState('');
@@ -45,9 +45,7 @@ function App() {
   const [submitError, setSubmitError] = useState('');
   const [savedArticles, setSavedArticles] = useState([]);
 
-  useEffect(() => {
-    checkToken();
-  }, []);
+
 
   //Main API calls
 
@@ -86,7 +84,13 @@ function App() {
   }, [getArticles]);
 
   function saveArticle(article) {
-    createArticle({
+    const isSaved = savedArticles.find(savedArticle => savedArticle.url === article.url)
+    if (isSaved){
+      deleteArticle(isSaved._id)
+      .then(()=>getArticles())
+
+    }
+   else  createArticle({
       keyword,
       title: article.title,
       text: article.content,
@@ -127,6 +131,7 @@ function App() {
       .then((res) => {
         if (res) {
           setLoggedIn(true);
+          localStorage.setItem('auth', loggedIn);
           setIsLoginModalOpen(false);
           setSubmitError('');
           resetForm();
@@ -157,17 +162,28 @@ function App() {
       });
   }
 
-  function checkToken() {
-    if (localStorage.getItem('jwt')) {
-      const jwt = localStorage.getItem('jwt');
-      verifyUser(jwt).then((res) => {
-        if (!res) {
-          return;
-        }
-        setLoggedIn(true);
-      });
+  const checkToken = React.useCallback(() => {
+    const jwt = localStorage.getItem('jwt')
+    if (jwt) {
+      verifyUser(jwt)
+        .then((res) => {
+          if (!res) {
+            return;
+          } else {
+            setLoggedIn(true);
+            localStorage.setItem('auth', loggedIn)
+          }
+        })
+        .catch((err) => {
+          console.log('Error', err);
+        });
     }
-  }
+  }, []);
+
+  useEffect(() => {
+    checkToken();
+  }, [checkToken]);
+
 
   //get search result from Search component
   function handleSearchSubmit(query) {
@@ -195,6 +211,7 @@ function App() {
     setLoggedIn(false);
     setIsMenuOpen(false);
     localStorage.removeItem('jwt');
+    localStorage.removeItem('auth')
     setCurrentUser({});
   }
 
@@ -262,13 +279,14 @@ function App() {
                 loggedIn={loggedIn}
                 onSave={saveArticle}
                 keyword={keyword}
+                savedArticles={savedArticles}
               />
             ) : (
               searchSubmitted && <NoResult />
             ))}
           <About />
         </Route>
-        <ProtectedRoute path="/articles" loggedIn={loggedIn}>
+        <ProtectedRoute exact path="/articles" loggedIn={loggedIn}>
           <SavedNews
             savedArticles={savedArticles}
             onDelete={handleDeleteArticle}
