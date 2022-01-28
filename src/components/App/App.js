@@ -73,7 +73,7 @@ function App() {
                 urlToImage: article.image,
                 owner: article.owner,
               };
-            })
+            }).reverse()
           );
         })
         .catch(()=> setSavedArticles([]));
