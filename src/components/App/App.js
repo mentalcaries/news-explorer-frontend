@@ -1,5 +1,6 @@
 import React, {useCallback, useState} from 'react';
 import './App.css';
+import { Switch } from 'react-router-dom/';
 import Main from '../Main/Main';
 import About from '../About/About';
 import Footer from '../Footer/Footer';
@@ -23,6 +24,7 @@ import {
 } from '../../utils/MainApi';
 import {useEffect} from 'react/cjs/react.development';
 import {CurrentUserContext} from '../../contexts/UserContext';
+import NotFound from '../NotFound/NotFound';
 
 function App() {
   const [currentUser, setCurrentUser] = useState({});
@@ -267,7 +269,7 @@ function App() {
           setIsMenuOpen={setIsMenuOpen}
           modalOpened={modalOpened}
           currentUser={currentUser}
-        />
+          />
         <Route exact path="/">
           <Main onSubmit={handleSearchSubmit} />
           {isLoading && <Preloader />}
@@ -286,6 +288,9 @@ function App() {
               searchSubmitted && <NoResult />
             ))}
           <About />
+        </Route>
+        <Route path ="*">
+          <NotFound/>
         </Route>
         <ProtectedRoute exact path="/articles" loggedIn={loggedIn}>
           <SavedNews
