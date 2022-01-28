@@ -90,7 +90,7 @@ function App() {
       .then(()=>getArticles())
 
     }
-   else  createArticle({
+   else createArticle({
       keyword,
       title: article.title,
       text: article.content,
@@ -191,11 +191,12 @@ function App() {
     api
       .getNews(query)
       .then((data) => {
+        const formattedQuery = query.replace(/(^\w{1})|(\s+\w{1})/g, letter => letter.toUpperCase())
         setArticles(data.articles);
         localStorage.setItem('searchResults', JSON.stringify(data.articles));
         setIsLoading(false);
         setSearchSubmitted(true);
-        setKeyword(query);
+        setKeyword(formattedQuery);
         localStorage.setItem('keyword', query);
       })
       .catch((err) => console.log(`Something went wrong: ${err}`));
