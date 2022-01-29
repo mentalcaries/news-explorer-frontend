@@ -23,7 +23,7 @@
 }
 
 .about__title {
-  font-family: 'Roboto Slab',Arial, Helvetica, sans-serif;
+  font-family: 'Roboto Slab', Arial, Helvetica, sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 40px;
@@ -75,10 +75,10 @@
   }
 }
 
-@media screen and (max-width: 675px ) {
-  .about{
-   margin-left: 20px;
-   margin-right: 20px;
+@media screen and (max-width: 675px) {
+  .about {
+    margin-left: 20px;
+    margin-right: 20px;
   }
 }
 

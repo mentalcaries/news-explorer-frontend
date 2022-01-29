@@ -22,7 +22,6 @@
 .footer__items {
   display: flex;
   justify-content: space-between;
- 
 }
 
 .footer__links {
@@ -58,7 +57,6 @@
     margin-left: 40px;
     margin-right: 40px;
   }
-  
 }
 
 @media screen and (max-width: 725px) {
@@ -74,15 +72,13 @@
     flex-direction: column-reverse;
   }
 
-  .footer__text{
-      margin-top: 38px;
+  .footer__text {
+    margin-top: 38px;
   }
 
-  .footer__links{
-      flex-direction: column;
-      min-height: 74px;
-      min-width: 200px;
+  .footer__links {
+    flex-direction: column;
+    min-height: 74px;
+    min-width: 200px;
   }
-        
-
 }

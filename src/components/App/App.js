@@ -22,7 +22,6 @@ import {
   getCurrentUser,
   getSavedArticles,
 } from '../../utils/MainApi';
-import {useEffect} from 'react/cjs/react.development';
 import {CurrentUserContext} from '../../contexts/UserContext';
 import NotFound from '../NotFound/NotFound';
 

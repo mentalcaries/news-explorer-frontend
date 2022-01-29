@@ -1,4 +1,4 @@
-.not-found{
+.not-found {
   width: 100%;
   background-image: url('../../images/404background.jpg');
   background-position: center;
@@ -9,16 +9,15 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  
 }
 
-.not-found__text{
+.not-found__text {
   font-family: 'Roboto', Arial, Helvetica, sans-serif;
   text-align: center;
   color: #fff;
   text-shadow: 1px 1px 2px black;
 }
 
-.not-found__link{
+.not-found__link {
   color: #fff;
 }

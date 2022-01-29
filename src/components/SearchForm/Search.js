@@ -1,8 +1,7 @@
-import React from 'react';
-import {useState} from 'react/cjs/react.development';
+import React, {useState} from 'react';
 import './Search.css';
 
-function Search({searchQuery, setSearchQuery, onSubmit,}) {
+function Search({onSubmit}) {
   const [placeholder, setPlaceholder] = useState('Enter topic');
   const [query, setQuery] = useState('');
   const [isClicked, setIsClicked] = useState(false);
@@ -30,12 +29,14 @@ function Search({searchQuery, setSearchQuery, onSubmit,}) {
         onChange={handleSearchChange}
       />
       <button
-        className={`search__button ${isHovered?'search__button_hover':''} ${isClicked ? 'search__button_clicked' : ''}`}
+        className={`search__button ${isHovered ? 'search__button_hover' : ''} ${
+          isClicked ? 'search__button_clicked' : ''
+        }`}
         type="submit"
         onMouseDown={() => setIsClicked(true)}
-        onMouseUp={()=> setIsClicked(false)}
-        onMouseOver={()=>setIsHovered(true)}
-        onMouseOut={()=>setIsHovered(false)}
+        onMouseUp={() => setIsClicked(false)}
+        onMouseOver={() => setIsHovered(true)}
+        onMouseOut={() => setIsHovered(false)}
       >
         Search
       </button>
