@@ -270,6 +270,7 @@ function App() {
           modalOpened={modalOpened}
           currentUser={currentUser}
           />
+          <Switch>
         <Route exact path="/">
           <Main onSubmit={handleSearchSubmit} />
           {isLoading && <Preloader />}
@@ -289,15 +290,17 @@ function App() {
             ))}
           <About />
         </Route>
-        <Route path ="*">
-          <NotFound/>
-        </Route>
+
         <ProtectedRoute exact path="/articles" loggedIn={loggedIn}>
           <SavedNews
             savedArticles={savedArticles}
             onDelete={handleDeleteArticle}
           />
         </ProtectedRoute>
+        <Route path ="*">
+          <NotFound/>
+        </Route>
+        </Switch>
         <Login
           isOpen={isLoginModalOpen}
           onClose={closeAllModals}

@@ -5,21 +5,20 @@ import './SavedNewsHeader.css';
 function SavedNewsHeader({savedArticles}) {
   const currentUser = useContext(CurrentUserContext);
 
+  // Create keyword array and hash
   const keywordArray = savedArticles.map((article) => article.keyword);
-
   let hash = {};
   keywordArray.forEach((keyword) => {
     if (!hash[keyword]) hash[keyword] = 0;
     hash[keyword]++;
   });
-
+  // Sort keywords according to frequency, and create array of sorted keywords
   const hashArray = Object.entries(hash);
   const sortedArray = hashArray.sort((a, b) => b[1] - a[1]);
   const sortedElements = sortedArray.map((element) => element[0]);
 
   const mainKeyword = sortedElements[0];
   const secondKeyword = sortedElements[1];
-  console.log(secondKeyword);
 
   return (
     <div className="saved__text">
