@@ -179,7 +179,7 @@ function App() {
           console.log('Error', err);
         });
     }
-  }, []);
+  }, [loggedIn]);
 
   useEffect(() => {
     checkToken();
