@@ -1,4 +1,4 @@
-# Welcome to News Explorer
+# Welcome to News Explorer 📰 🌎
 ### Submitted as the Final Project for Practicum
 By Devin Jaggernauth
 
