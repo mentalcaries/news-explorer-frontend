@@ -1,5 +1,4 @@
-import React from 'react';
-import { useState } from 'react/cjs/react.development';
+import React, {useState, useEffect} from 'react';
 import './ModalWithForm.css';
 
 function ModalWithForm({
@@ -15,37 +14,47 @@ function ModalWithForm({
   children,
   userOption,
   onSwitchModal,
-  button
+  button,
+  submitError,
 }) {
-
   const [emailErrorMessage, setEmailErrorMesage] = useState('');
   const [passwordErrorMessage, setPasswordErrorMesage] = useState('');
-  const [isFormValid, setIsFormValid] = useState(false)
+  const [isFormValid, setIsFormValid] = useState(false);
+  const formRef = React.createRef();
 
-  function handleEmailChange(evt){
-    setEmail(evt.target.value)
-    setEmailErrorMesage(evt.target.validationMessage)
+  useEffect(() => {
+    setIsFormValid(formRef.current.checkValidity());
+  }, [formRef]);
+
+  function handleEmailChange(evt) {
+    setEmail(evt.target.value);
+    setEmailErrorMesage(evt.target.validationMessage);
   }
 
   function handlePasswordChange(evt) {
     setPassword(evt.target.value);
-    setPasswordErrorMesage(evt.target.validationMessage)
+    setPasswordErrorMesage(evt.target.validationMessage);
   }
 
-  function handleFormValidation(evt){
-    setIsFormValid(evt.target.validity.valid)
-    //Validation should be set for both fields depending on requirements
-    //To recheck with back end
+  function handleFormSubmit(evt) {
+    evt.preventDefault();
+    onSubmit();
   }
 
   return (
-    <div className={`modal ${isOpen? 'modal_opened': ''}`} >
+    <div className={`modal ${isOpen ? 'modal_opened' : ''}`}>
       <div className="modal__overlay" onClick={onOutsideClick}>
         <div className="modal__container">
           <button onClick={onClose} className="modal__close-btn"></button>
           <h2 className="modal__title">{title}</h2>
 
-          <form action="" className="modal__form"  noValidate onSubmit={onSubmit} onChange={handleFormValidation} >
+          <form
+            action=""
+            className="modal__form"
+            noValidate
+            onSubmit={handleFormSubmit}
+            ref={formRef}
+          >
             <p className="modal__label" type="email" name="email">
               Email
             </p>
@@ -57,7 +66,9 @@ function ModalWithForm({
               onChange={handleEmailChange}
               value={email}
             />
-            <span className={`modal__error`} id="email-error" >{emailErrorMessage} </span>
+            <span className={`modal__error`} id="email-error">
+              {emailErrorMessage}{' '}
+            </span>
 
             <p className="modal__label">Password</p>
             <input
@@ -70,12 +81,31 @@ function ModalWithForm({
               value={password}
               minLength={8}
             />
-            <span className={`modal__error`} id="password-error" >{passwordErrorMessage}</span>
-              {children}
-
-            <button className={`modal__submit ${isFormValid? '' :'modal__submit_disabled'}`} disabled={isFormValid? false: true}>{button}</button>
+            <span className={`modal__error`} id="password-error">
+              {passwordErrorMessage}
+            </span>
+            {children}
+            <span
+              className={`modal__error modal__error_submit`}
+              id="signup-error"
+            >
+              {submitError}
+            </span>
+            <button
+              className={`modal__submit ${
+                isFormValid ? '' : 'modal__submit_disabled'
+              }`}
+              disabled={isFormValid ? false : true}
+            >
+              {button}
+            </button>
           </form>
-          <p className="modal__text">or <span onClick={onSwitchModal} className="modal__span">{userOption}</span></p>
+          <p className="modal__text">
+            or{' '}
+            <span onClick={onSwitchModal} className="modal__span">
+              {userOption}
+            </span>
+          </p>
         </div>
       </div>
     </div>

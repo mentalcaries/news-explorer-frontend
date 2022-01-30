@@ -2,25 +2,18 @@ import React from 'react';
 import SavedCard from '../SavedCard/SavedCard';
 import SavedNewsHeader from '../SavedNewsHeader/SavedNewsHeader';
 import './SavedNews.css';
-import sample from './sample.json'
 
-function SavedNews() {
-
-
-  const card = JSON.parse(JSON.stringify(sample));
-
-
+function SavedNews({savedArticles, onDelete}) {
   return (
     <section className="saved">
-      <SavedNewsHeader />
+      <SavedNewsHeader savedArticles={savedArticles} />
 
       <div className="saved__articles">
-        <SavedCard card={card} />
-        <SavedCard card={card} />
-        <SavedCard card={card} />
-        <SavedCard card={card} />
-        <SavedCard card={card} />
-
+        {savedArticles.map((article) => {
+          return (
+            <SavedCard card={article} key={article._id} onDelete={onDelete} />
+          );
+        })}
       </div>
       {/* Add saved cards here */}
     </section>

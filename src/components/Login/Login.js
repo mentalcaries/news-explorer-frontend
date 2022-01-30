@@ -12,6 +12,7 @@ function Login({
   setPassword,
   password,
   onSwitchModal,
+  submitError
   
 }) {
   return (
@@ -27,6 +28,7 @@ function Login({
       setPassword={setPassword}
       userOption="Sign Up"
       onSwitchModal={onSwitchModal}
+      submitError={submitError}
       button="Sign In"
     />
   );

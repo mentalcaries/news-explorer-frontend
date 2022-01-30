@@ -63,6 +63,10 @@
   border-bottom: 3px solid #1a1b22;
 }
 
+.nav__logout {
+  padding-left: 20px;
+}
+
 @media screen and (max-width: 850px) {
   .nav__link {
     font-size: 16px;

@@ -5,7 +5,14 @@ import {NavLink} from 'react-router-dom';
 import logOut from '../../images/logout-black.svg';
 import logOutLight from '../../images/logout-white.svg';
 
-function Navigation({onLogin, onLogout, loggedIn, isMenuOpen, lightHeader}) {
+function Navigation({
+  onLogin,
+  onLogout,
+  loggedIn,
+  isMenuOpen,
+  lightHeader,
+  currentUser,
+}) {
   const {pathname} = useLocation();
   return (
     <nav className={`nav ${isMenuOpen ? 'nav_open' : ''}`}>
@@ -47,7 +54,7 @@ function Navigation({onLogin, onLogout, loggedIn, isMenuOpen, lightHeader}) {
             pathname === '/articles' ? 'nav__button_light' : ''
           }`}
         >
-          Elise
+          {currentUser.name}
           <img
             src={lightHeader ? logOutLight : logOut}
             alt="Log out icon"

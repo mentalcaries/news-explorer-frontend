@@ -151,6 +151,11 @@
   margin-bottom: 13px;
 }
 
+.modal__error_submit{
+  margin-top: 0px;
+  text-align: center;
+}
+
 .modal__span{
   color:#2F71E5;
   cursor: pointer;

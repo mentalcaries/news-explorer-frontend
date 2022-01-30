@@ -1,10 +1,15 @@
-import React from 'react';
-import {useState} from 'react/cjs/react.development';
+import React, {useState} from 'react';
 
 import ResultCard from '../ResultCard/ResultCard';
 import './SearchResults.css';
 
-function SearchResults({articles, isLoading, handleLogin}) {
+function SearchResults({
+  articles,
+  handleLogin,
+  loggedIn,
+  onSave,
+  savedArticles,
+}) {
   const CARDS_RENDERED = 3;
   const [moreCards, setMoreCards] = useState(0);
 
@@ -21,7 +26,14 @@ function SearchResults({articles, isLoading, handleLogin}) {
         <div className="results__cards">
           {newsList.map((card) => {
             return (
-              <ResultCard card={card} key={card.source.id + card.publishedAt} handleLogin={handleLogin} />
+              <ResultCard
+                card={card}
+                key={card.publishedAt}
+                handleLogin={handleLogin}
+                loggedIn={loggedIn}
+                onSave={onSave}
+                savedArticles={savedArticles}
+              />
             );
           })}
         </div>
