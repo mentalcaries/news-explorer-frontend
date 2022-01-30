@@ -206,6 +206,7 @@ function App() {
   function handleLogin() {
     closeAllModals();
     setIsLoginModalOpen(true);
+    resetForm()
     setIsMenuOpen(false);
   }
 
@@ -218,6 +219,7 @@ function App() {
   }
 
   function handleRegister() {
+    resetForm();
     setIsRegisterModalOpen(true);
     //Header menu may have to be closed here as well
   }
@@ -264,6 +266,7 @@ function App() {
           loggedIn={loggedIn}
           onLogin={handleLogin}
           onLogout={handleLogout}
+          onRegister={handleRegister}
           isMenuOpen={isMenuOpen}
           setIsMenuOpen={setIsMenuOpen}
           modalOpened={modalOpened}
