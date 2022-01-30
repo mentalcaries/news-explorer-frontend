@@ -2,8 +2,17 @@
 ### Submitted as the Final Project for Practicum
 By Devin Jaggernauth
 
+🌍 [View Live Site here](https://newsxp.students.nomoreparties.sbs/) 
+
+### 🖥 Tech Stack: MERN
+- React JS - Frontend
+- CSS - styles
+- Node/Express JS - Back end server
+- MongoDB - Backend database
+- Google Cloud for hosting and deployment
+
 ---
-### FrontEnd
+### 🧑🏽‍💻 FrontEnd
 
 This project features a React frontend that makes calls to NewsAPI for news articles. The app is fully responsive with all styles done in vanilla CSS. Routing is done via React Router with Higher Order Components such as ProtectedRoutes being used to hide content that requires users to be logged in.
 
@@ -13,10 +22,7 @@ Once logged in, users have the option to search and save articles for later peru
 
 The Saved Articles header returns a summary of the top two keywords which is conditionally rendered. Deleting cards will update and adjust this summary in real time.
 
-### Link to Live Site
-The live site can be viewed here: https://newsxp.students.nomoreparties.sbs/
-
 ---
 
-### Backend Repository can be viewed here:
+### 🥭 Backend Repository can be viewed here:
 https://github.com/mentalcaries/news-explorer-backend
