@@ -6,7 +6,7 @@ By Devin Jaggernauth
 
 ### 🖥 Tech Stack: MERN
 - React JS - Frontend
-- CSS - styles
+- CSS - Styling
 - Node/Express JS - Back end server
 - MongoDB - Backend database
 - Google Cloud for hosting and deployment
