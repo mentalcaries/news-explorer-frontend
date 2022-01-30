@@ -4,7 +4,7 @@
 ### Submitted as the Final Project for Practicum
 By Devin Jaggernauth
 
-### <a href="https://newsxp.students.nomoreparties.sbs/" target="_blank">👀 View Live Site here</a>
+<a href="https://newsxp.students.nomoreparties.sbs/" target="_blank">👀 View Live Site here</a>
 
 
 ### 🖥 Tech Stack: MERN
