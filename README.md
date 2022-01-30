@@ -4,8 +4,7 @@
 ### Submitted as the Final Project for Practicum
 By Devin Jaggernauth
 
-<a href="https://newsxp.students.nomoreparties.sbs/" target="_blank">👀 View Live Site here</a>
-
+### 👀 [View Live Site here](https://newsxp.students.nomoreparties.sbs/) 
 
 ### 🖥 Tech Stack: MERN
 - React JS - Frontend
