@@ -1,5 +1,5 @@
 # Welcome to News Explorer 📰 🌎
-<img src="https://images.unsplash.com/photo-1523495225575-104bd7a11999?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2670&q=80" alt="explore header" style="height: 175px; width:100%; object-fit: cover"/>
+<img src="https://images.unsplash.com/photo-1476304884326-cd2c88572c5f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2669&q=80" alt="Header" style="height: 175px; width:100%; object-fit: cover"/>
 
 ### Submitted as the Final Project for Practicum
 By Devin Jaggernauth
