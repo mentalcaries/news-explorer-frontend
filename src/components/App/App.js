@@ -1,6 +1,6 @@
-import React, {useCallback, useState, useEffect } from 'react';
+import React, {useCallback, useState, useEffect} from 'react';
 import './App.css';
-import { Switch } from 'react-router-dom/';
+import {Switch} from 'react-router-dom/';
 import Main from '../Main/Main';
 import About from '../About/About';
 import Footer from '../Footer/Footer';
@@ -46,8 +46,6 @@ function App() {
   const [submitError, setSubmitError] = useState('');
   const [savedArticles, setSavedArticles] = useState([]);
 
-
-
   //Main API calls
 
   useEffect(() => {
@@ -62,22 +60,24 @@ function App() {
       getSavedArticles()
         .then((articleArray) => {
           setSavedArticles(
-            articleArray.map((article) => {
-              return {
-                _id: article._id,
-                keyword: article.keyword,
-                title: article.title,
-                content: article.text,
-                date: article.date,
-                source: {name: article.source},
-                url: article.link,
-                urlToImage: article.image,
-                owner: article.owner,
-              };
-            }).reverse()
+            articleArray
+              .map((article) => {
+                return {
+                  _id: article._id,
+                  keyword: article.keyword,
+                  title: article.title,
+                  content: article.text,
+                  date: article.date,
+                  source: {name: article.source},
+                  url: article.link,
+                  urlToImage: article.image,
+                  owner: article.owner,
+                };
+              })
+              .reverse()
           );
         })
-        .catch(()=> setSavedArticles([]));
+        .catch(() => setSavedArticles([]));
   }, [loggedIn]);
 
   useEffect(() => {
@@ -85,26 +85,26 @@ function App() {
   }, [getArticles]);
 
   function saveArticle(article) {
-    const isSaved = savedArticles.find(savedArticle => savedArticle.url === article.url)
-    if (isSaved){
-      deleteArticle(isSaved._id)
-      .then(()=>getArticles())
-
-    }
-   else createArticle({
-      keyword,
-      title: article.title,
-      text: article.content,
-      date: article.publishedAt,
-      source: article.source.name,
-      link: article.url,
-      image: article.urlToImage,
-      owner: currentUser._id,
-    })
-      .then(() => {
-        getArticles();
+    const isSaved = savedArticles.find(
+      (savedArticle) => savedArticle.url === article.url
+    );
+    if (isSaved) {
+      deleteArticle(isSaved._id).then(() => getArticles());
+    } else
+      createArticle({
+        keyword,
+        title: article.title,
+        text: article.content,
+        date: article.publishedAt,
+        source: article.source.name,
+        link: article.url,
+        image: article.urlToImage,
+        owner: currentUser._id,
       })
-      .catch((err) => console.log(err, 'Could not save card'));
+        .then(() => {
+          getArticles();
+        })
+        .catch((err) => console.log(err, 'Could not save card'));
   }
 
   function handleDeleteArticle(cardId) {
@@ -164,7 +164,7 @@ function App() {
   }
 
   const checkToken = React.useCallback(() => {
-    const jwt = localStorage.getItem('jwt')
+    const jwt = localStorage.getItem('jwt');
     if (jwt) {
       verifyUser(jwt)
         .then((res) => {
@@ -172,7 +172,7 @@ function App() {
             return;
           } else {
             setLoggedIn(true);
-            localStorage.setItem('auth', loggedIn)
+            localStorage.setItem('auth', loggedIn);
           }
         })
         .catch((err) => {
@@ -185,14 +185,15 @@ function App() {
     checkToken();
   }, [checkToken]);
 
-
   //get search result from Search component
   function handleSearchSubmit(query) {
     setIsLoading(true);
     api
       .getNews(query)
       .then((data) => {
-        const formattedQuery = query.replace(/(^\w{1})|(\s+\w{1})/g, letter => letter.toUpperCase())
+        const formattedQuery = query.replace(/(^\w{1})|(\s+\w{1})/g, (letter) =>
+          letter.toUpperCase()
+        );
         setArticles(data.articles);
         localStorage.setItem('searchResults', JSON.stringify(data.articles));
         setIsLoading(false);
@@ -206,7 +207,7 @@ function App() {
   function handleLogin() {
     closeAllModals();
     setIsLoginModalOpen(true);
-    resetForm()
+    resetForm();
     setIsMenuOpen(false);
   }
 
@@ -214,7 +215,7 @@ function App() {
     setLoggedIn(false);
     setIsMenuOpen(false);
     localStorage.removeItem('jwt');
-    localStorage.removeItem('auth')
+    localStorage.removeItem('auth');
     setCurrentUser({});
   }
 
@@ -271,37 +272,37 @@ function App() {
           setIsMenuOpen={setIsMenuOpen}
           modalOpened={modalOpened}
           currentUser={currentUser}
-          />
-          <Switch>
-        <Route exact path="/">
-          <Main onSubmit={handleSearchSubmit} />
-          {isLoading && <Preloader />}
+        />
+        <Switch>
+          <Route exact path="/">
+            <Main onSubmit={handleSearchSubmit} />
+            {isLoading && <Preloader />}
 
-          {articles !== null &&
-            (articles.length > 0 ? (
-              <SearchResults
-                articles={articles}
-                handleLogin={handleLogin}
-                loggedIn={loggedIn}
-                onSave={saveArticle}
-                keyword={keyword}
-                savedArticles={savedArticles}
-              />
-            ) : (
-              searchSubmitted && <NoResult />
-            ))}
-          <About />
-        </Route>
+            {articles !== null &&
+              (articles.length > 0 ? (
+                <SearchResults
+                  articles={articles}
+                  handleLogin={handleLogin}
+                  loggedIn={loggedIn}
+                  onSave={saveArticle}
+                  keyword={keyword}
+                  savedArticles={savedArticles}
+                />
+              ) : (
+                searchSubmitted && <NoResult />
+              ))}
+            <About />
+          </Route>
 
-        <ProtectedRoute exact path="/articles" loggedIn={loggedIn}>
-          <SavedNews
-            savedArticles={savedArticles}
-            onDelete={handleDeleteArticle}
-          />
-        </ProtectedRoute>
-        <Route path ="*">
-          <NotFound/>
-        </Route>
+          <ProtectedRoute exact path="/articles" loggedIn={loggedIn}>
+            <SavedNews
+              savedArticles={savedArticles}
+              onDelete={handleDeleteArticle}
+            />
+          </ProtectedRoute>
+          <Route path="*">
+            <NotFound />
+          </Route>
         </Switch>
         <Login
           isOpen={isLoginModalOpen}

@@ -12,7 +12,7 @@ function About() {
         <h2 className="about__title">About the Author</h2>
         <p className="about__paragraph">
           Devin Jaggernauth is a Full Stack Developer who's currently working
-          with JavaScript and the MERN Stack having graduated from Pracicum's
+          with JavaScript and the MERN Stack having graduated from Practicum's
           Web Dev program in January 2022.
         </p>
         <p className="about__paragraph">
