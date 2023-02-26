@@ -17,6 +17,7 @@ function Search({onSubmit}) {
       return setPlaceholder('Please enter some keywords');
     }
     onSubmit(query);
+    setQuery('')
   }
 
   return (

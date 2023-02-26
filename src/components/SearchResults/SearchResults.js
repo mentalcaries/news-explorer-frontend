@@ -9,6 +9,7 @@ function SearchResults({
   loggedIn,
   onSave,
   savedArticles,
+  keyword
 }) {
   const CARDS_RENDERED = 3;
   const [moreCards, setMoreCards] = useState(0);
@@ -22,7 +23,7 @@ function SearchResults({
   return (
     <section className="results">
       <div className="results__wrapper">
-        <h2 className="results__title">Search results</h2>
+        <h2 className="results__title">Search results for '{keyword}'</h2>
         <div className="results__cards">
           {newsList.map((card) => {
             return (
