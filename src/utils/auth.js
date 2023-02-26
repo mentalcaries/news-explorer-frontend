@@ -1,6 +1,6 @@
 const BASE_URL =
   process.env.NODE_ENV === 'production'
-    ? 'https://api.newsxp.students.nomoreparties.sbs'
+    ? process.env.REACT_APP_API_URL
     : 'http://localhost:3000';
 
 function checkRes(res) {
