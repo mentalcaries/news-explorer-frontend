@@ -2,7 +2,7 @@
 ### Submitted as the Final Project for Practicum
 By Devin Jaggernauth
 
-### 👀 [View Live Site here](https://newsxp.students.nomoreparties.sbs/) 
+### 👀 [View Live Site here](https://newsxpdev.students.nomoredomainssbs.ru/) 
 
 ### 🖥 Tech Stack: MERN
 - React JS - Frontend
